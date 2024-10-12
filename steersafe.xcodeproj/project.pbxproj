@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AB8AAEFB2CB9FDF700125140 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */; };
+		AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */; };
+		AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		AB8AAEA92CB9D9B600125140 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +33,7 @@
 		AB8AAE982CB9D9B400125140 /* steersafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = steersafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8AAEA82CB9D9B600125140 /* steersafeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = steersafeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8AAEB22CB9D9B600125140 /* steersafeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = steersafeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB8AAF022CB9FF4300125140 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -65,6 +72,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8AAEFB2CB9FDF700125140 /* FirebaseAnalytics in Frameworks */,
+				AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */,
+				AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +102,7 @@
 				AB8AAEAB2CB9D9B600125140 /* steersafeTests */,
 				AB8AAEB52CB9D9B600125140 /* steersafeUITests */,
 				AB8AAE992CB9D9B400125140 /* Products */,
+				AB8AAF022CB9FF4300125140 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +136,9 @@
 			);
 			name = steersafe;
 			packageProductDependencies = (
+				AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */,
+				AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */,
+				AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */,
 			);
 			productName = steersafe;
 			productReference = AB8AAE982CB9D9B400125140 /* steersafe.app */;
@@ -208,6 +222,9 @@
 			);
 			mainGroup = AB8AAE8F2CB9D9B400125140;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AB8AAE992CB9D9B400125140 /* Products */;
 			projectDirPath = "";
@@ -411,7 +428,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"steersafe/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = steersafe/Info.plist;
+				INFOPLIST_FILE = "GoogleService-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,7 +457,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"steersafe/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = steersafe/Info.plist;
+				INFOPLIST_FILE = "GoogleService-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -567,6 +584,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AB8AAE902CB9D9B400125140 /* Project object */;
 }
