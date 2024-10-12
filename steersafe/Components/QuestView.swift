@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct QuestView: View {
@@ -56,6 +54,7 @@ struct QuestView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.green.opacity(0.3), lineWidth: 3)
         )
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 5, y: 5)  // Add shadow here
     }
 }
 
@@ -66,4 +65,3 @@ struct QuestView_Previews: PreviewProvider {
             .padding()
     }
 }
-
