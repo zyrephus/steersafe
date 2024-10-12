@@ -58,45 +58,50 @@ struct HomePageView: View {
                 }) {
                     Image("green_wheel")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 60, height: 60)  // Larger size for the icons
                 }
 
-                Spacer()
+                Spacer(minLength: 40)  // Increase space between icons
 
                 // Market icon
                 Button(action: {
                     // Market action
+                    
                 }) {
                     Image("market")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 60, height: 60)  // Larger size for the icons
                 }
 
-                Spacer()
+                Spacer(minLength: 40)  // Increase space between icons
 
                 // Leaderboard icon
                 Button(action: {
                     // Leaderboard action
+                    
                 }) {
                     Image("leaderboard")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 60, height: 60)  // Larger size for the icons
                 }
 
-                Spacer()
+                Spacer(minLength: 40)  // Increase space between icons
 
                 // Profile icon
                 Button(action: {
                     // Profile action
+                    
                 }) {
                     Image("profile")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 60, height: 60)  // Larger size for the icons
                 }
             }
-            .padding()
+            .padding(.horizontal, 20)
             .frame(maxWidth: .infinity)
-            .background(Color.gray.opacity(0.2))
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 10)
         }
         .padding()
     }
@@ -107,3 +112,4 @@ struct HomePageView_Previews: PreviewProvider {
         HomePageView()
     }
 }
+
