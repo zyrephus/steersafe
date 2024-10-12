@@ -41,8 +41,8 @@ struct HomePageView: View {
                     }
                 }
             }) {
-                // Conditionally render either the grey or green wheel with a smooth transition
-                Image(viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel")
+                // Conditionally render either the red wheel, grey wheel, or green wheel based on z-axis movement and driving state
+                Image(viewModel.zAxisRotationRate > 1.0 ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
                     .resizable()
                     .frame(width: 200, height: 200)
                     .transition(.scale)  // Smooth scaling transition
@@ -50,12 +50,12 @@ struct HomePageView: View {
             .background(Color.gray.opacity(0.3))
             .cornerRadius(100)
 
-            // Centered Text, changes based on driving state
-            Text(viewModel.isDriving ? "stay focused" : "tap the wheel to start")
+            // Centered Text, changes based on z-axis movement and driving state
+            Text(viewModel.zAxisRotationRate > 1.0 ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
                 .font(.system(size: 20))
                 .multilineTextAlignment(.center)
                 .padding(.top, 10)
-                .foregroundColor(viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray)  // Green if driving, gray otherwise
+                .foregroundColor(viewModel.zAxisRotationRate > 1.0 ? .red : (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))  // Red if using phone, green if driving, gray otherwise
 
             Spacer()
         }
@@ -93,3 +93,4 @@ struct HomePageView_Previews: PreviewProvider {
         HomePageView()
     }
 }
+
