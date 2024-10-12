@@ -29,6 +29,8 @@ struct steersafe: App {
     WindowGroup {
       NavigationView {
         LoginView()
+              .background(Color.white)  // Set background color to white
+              .preferredColorScheme(.light)  // Force light mode
       }
     }
   }
