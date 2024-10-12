@@ -1,5 +1,5 @@
 import FirebaseAuth
-import FirebaseDatabase // Import Realtime Database
+import FirebaseDatabase
 
 class SignupViewModel: ObservableObject {
     // Existing properties...
