@@ -10,7 +10,7 @@ extension Font {
 }
 
 struct LoginView: View {
-    @State private var username: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false // Track password visibility
     @State private var loginError: String? = nil // Track error for login
@@ -36,7 +36,7 @@ struct LoginView: View {
                 .padding(.bottom, 40)
 
             // Username TextField
-            TextField("username", text: $username)
+            TextField("email", text: $email)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(20)
@@ -132,7 +132,7 @@ struct LoginView: View {
         isLoading = true
 
         // Firebase Authentication
-        Auth.auth().signIn(withEmail: username, password: password) { authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             isLoading = false // Stop the loading indicator
 
             if let error = error {
