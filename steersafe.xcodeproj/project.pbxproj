@@ -54,6 +54,11 @@
 			path = steersafeUITests;
 			sourceTree = "<group>";
 		};
+		E0D605E42CBA0D940059D295 /* steersafe_homepage */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = steersafe_homepage;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +98,7 @@
 				AB8AAE992CB9D9B400125140 /* Products */,
 				AB8AAF022CB9FF4300125140 /* GoogleService-Info.plist */,
 				AB8AAEE82CB9F8EF00125140 /* Info.plist */,
+				E0D605E42CBA0D940059D295 /* steersafe_homepage */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +129,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				AB8AAE9A2CB9D9B400125140 /* steersafe */,
+				E0D605E42CBA0D940059D295 /* steersafe_homepage */,
 			);
 			name = steersafe;
 			packageProductDependencies = (
