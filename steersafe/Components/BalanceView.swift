@@ -14,7 +14,8 @@ struct BalanceView: View {
                 .foregroundColor(.white)
                 .padding(.trailing, 10) // Add right padding to the balance text
         }
-        .padding()
+        .padding(.horizontal, 15)
+        .padding(.vertical, 8)
         .background(Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255))
         .cornerRadius(40)
     }
