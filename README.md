@@ -3,6 +3,8 @@
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Firestore](https://img.shields.io/badge/Firestore-%23FFCA28.svg?style=for-the-badge&logo=firebase&logoColor=white)
 ![CoreMotion](https://img.shields.io/badge/CoreMotion-%23000000.svg?style=for-the-badge&logo=apple&logoColor=white)
+![CoreLocation](https://img.shields.io/badge/CoreLocation-%23000000.svg?style=for-the-badge&logo=apple&logoColor=white)
+![TomTom API](https://img.shields.io/badge/TomTom-FF0000?style=for-the-badge&logo=tomtom&logoColor=white)
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 
@@ -22,4 +24,9 @@ What sets SteerSafe apart is its **gentle, rewarding, and gamified approach**—
 - Frontend: Swift + SwiftUI
 - Backend: Firebase
 - Database: Firebase Realtime Database
-- APIs: Apple CoreMotion, Firebase User Authentication
+- APIs: Apple CoreMotion, Apple CoreLocation, TomTom Map Data, Firebase User Authentication
+
+## 🗺️ Future Roadmap
+- [ ] Integrate new reward partnerships (e.g., Starbucks, Amazon).
+- [ ] Get an Apple Developer License for more access to phone data to improve phone usage monitoring
+
