@@ -12,6 +12,3 @@ struct SplashScreenView: View {
         .background(Color.white) // Set the background color
     }
 }
-#Preview {
-    SplashScreenView()
-}
