@@ -65,7 +65,6 @@ struct ProfileView: View {
                 }
                 .padding(.horizontal, 30)
                 .padding(.vertical, 10)
-                .padding(.top, 20)
                 
                 HStack{
                     Text("challenges")
@@ -76,23 +75,72 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .padding(.top, 20)
 
-                // Placeholder for Ride Cards
-                HStack(spacing: 10) {
-                    ForEach(0..<3) { _ in
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(Color(UIColor.systemGray6))
-                            .frame(width: 100, height: 100)
-                            .overlay(
-                                Image(systemName: "person.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 40, height: 40)
-                                    .padding(.top, 60)
-                                    .padding(.trailing, 10)
-                            )
+                VStack(spacing: 10) {
+                    HStack {
+                        Image(systemName: "flame.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.orange)
+                            .padding(.leading, 10)
+                        
+                        HStack {
+                            Text("keep your daily streak alive!")
+                                .font(Font.inriaSans(size: 16))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Text("49")
+                                .font(Font.inriaSans(size: 24))
+                                .foregroundColor(.orange)
+                                .fontWeight(.bold)
+                        }
+                        .padding(.leading, 10)
+                        
+                        Spacer()
                     }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 4) // Shadow with slight offset
+                    )
+                    
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.yellow)
+                            .padding(.leading, 10)
+                        
+                        HStack {
+                            Text("no distractions here.")
+                                .font(Font.inriaSans(size: 16))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Text("3/5")
+                                .font(Font.inriaSans(size: 24))
+                                .foregroundColor(.yellow)
+                                .fontWeight(.bold)
+                        }
+                        .padding(.leading, 10)
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 4) // Shadow with slight offset
+                    )
+                    .padding(.top, 15)
                 }
                 .padding(.horizontal, 30)
+
                 
 
                 // Invite a Friend Section
