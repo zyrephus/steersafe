@@ -1,47 +1,41 @@
-//
-//  steersafeApp.swift
-//  steersafe
-//
-//  Created by Jonathan Oh on 10/11/24.
-//
-
 import SwiftUI
 import FirebaseCore
 import FirebaseAuth
-
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
-
     return true
   }
 }
 
 @main
 struct steersafe: App {
-    // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @State private var isActive = false
+    @State private var isActive = false // For toggling between splash and login view
 
     var body: some Scene {
         WindowGroup {
-            if isActive {
-                NavigationView {
-                    LoginView()
-                        .background(Color.white)  // Set background color to white
-                        .preferredColorScheme(.light)  // Force light mode
-                }
-            } else {
-                SplashScreenView()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-                            withAnimation {
-                                self.isActive = true  // Transition to LoginView after 2 seconds
-                            }
-                        }
+            ZStack {
+                if isActive {
+                    NavigationView {
+                        LoginView()
+                            .background(Color.white)
+                            .preferredColorScheme(.light) // Force light mode
                     }
+                    .transition(.move(edge: .trailing).combined(with: .opacity)) // Combined sliding and fade transition
+                } else {
+                    SplashScreenView()
+                        .transition(.opacity) // Fade transition when splash screen disappears
+                }
+            }
+            .animation(.easeInOut(duration: 1.0), value: isActive) // Attach animation to the ZStack
+            .onAppear {
+                // Simulate splash screen duration and then transition
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                    self.isActive = true // Trigger transition from SplashScreen to LoginView
+                }
             }
         }
     }
