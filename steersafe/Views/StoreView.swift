@@ -38,6 +38,7 @@ struct StoreView: View {
                 ZStack {
                     ScrollView {
                         VStack(spacing: 0) {
+                        
                             // Insert the QuestView at the top of the scrollable content
                             QuestView()
                                 .padding(.horizontal)
@@ -81,6 +82,7 @@ struct StoreView: View {
                             }
                             .padding()
                         }
+                        .padding(.top, 30)
                     }
                     
                     // Top shadow
@@ -152,5 +154,11 @@ struct StoreView: View {
         .shadow(radius: 10)
         .frame(width: 300)
         .padding(.bottom, 50)
+    }
+}
+
+struct StoreView_Previews: PreviewProvider {
+    static var previews: some View {
+        StoreView()
     }
 }
