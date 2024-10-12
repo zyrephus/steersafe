@@ -12,7 +12,7 @@ struct ProfileView: View {
         let lastHours = Int(profileViewModel.lastHoursDriven)
         let lastMinutes = Int((profileViewModel.lastHoursDriven - Double(lastHours)) * 60)
         let lastFormattedTime = String(format: "%dh %02dm", lastHours, lastMinutes)
-
+        
         NavigationStack {
             VStack(spacing: 20) {
                 // Logo and Balance Section
@@ -23,7 +23,7 @@ struct ProfileView: View {
                         .frame(height: 50)
                     Spacer()
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 20) // Ensure consistent horizontal padding
                 
                 // Profile Title
                 HStack {
@@ -49,11 +49,11 @@ struct ProfileView: View {
                         Text("\(lastFormattedTime), \(profileViewModel.lastTokens) coins")
                             .font(Font.inriaSans(size: 16))
                             .foregroundColor(.black)
-
+                        
                     }
                     
                     Spacer()
-
+                    
                     VStack(alignment: .center, spacing: 10) {
                         Image(systemName: "clock.fill")
                             .resizable()
@@ -75,11 +75,11 @@ struct ProfileView: View {
                     Text("challenges")
                         .font(Font.inriaSans(size: 18))
                         .foregroundColor(Color(red: 0.23, green: 0.86, blue: 0.57))
-                        
+                    
                 }
                 .padding(.horizontal)
-                .padding(.top, 20)
-
+                .padding(.top, 10)
+                
                 VStack(spacing: 10) {
                     HStack {
                         Image(systemName: "flame.fill")
@@ -145,9 +145,7 @@ struct ProfileView: View {
                     .padding(.top, 15)
                 }
                 .padding(.horizontal, 30)
-
                 
-
                 // Invite a Friend Section
                 HStack {
                     Image(systemName: "person.badge.plus")
@@ -169,7 +167,7 @@ struct ProfileView: View {
                         .background(Color(UIColor.systemGray6).cornerRadius(20))
                 )
                 .padding(.horizontal, 30)
-                .padding(.top, 20)
+                .padding(.top, 10)
                 
                 // Logout Button
                 Button(action: {
@@ -185,23 +183,24 @@ struct ProfileView: View {
                         .background(Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)))
                         .cornerRadius(20)
                 }
-                .padding(.top, 20)
+                .padding(.top, 10)
                 .padding(.horizontal, 30)
-
+                
                 Spacer()
-
+                
                 // Navigate back to login page after logging out
                 NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true), isActive: $isLoggedOut) {
                     EmptyView()
                 }
             }
+            .padding(.top) // Added .padding(.top) to match HomePageView
             .navigationBarHidden(true)
         }
     }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
+    
+    struct ProfileView_Previews: PreviewProvider {
+        static var previews: some View {
+            ProfileView()
+        }
     }
 }

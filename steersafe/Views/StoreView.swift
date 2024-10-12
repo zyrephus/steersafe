@@ -22,7 +22,7 @@ struct StoreView: View {
                         .frame(height: 50)
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20) // Ensure consistent horizontal padding
                 
                 HStack {
                     Text("shop")
@@ -89,6 +89,7 @@ struct StoreView: View {
                             
                 Spacer()
             }
+            .padding(.top) // Added .padding(.top) to match HomePageView
             
             // Display the popup if showPopup is true
             if showPopup {
