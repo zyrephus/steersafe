@@ -1,21 +1,21 @@
 import FirebaseAuth
 import FirebaseDatabase
 
-class ProfileViewModel: ObservableObject {
-    @Published var tokens: Int = 0
-    @Published var hoursDriven: Double = 0.0
 
+class StoreViewModel: ObservableObject {
+    @Published var tokens: Int = 0
+    
     init() {
         fetchUserData()
     }
-
+    
     // Function to fetch tokens and hoursDriven from Realtime Database
     func fetchUserData() {
         guard let uid = Auth.auth().currentUser?.uid else {
             print("No user is currently logged in.")
             return
         }
-
+        
         let ref = Database.database().reference()
         ref.child("users").child(uid).observeSingleEvent(of: .value) { snapshot in
             if let userData = snapshot.value as? [String: Any] {
@@ -25,28 +25,11 @@ class ProfileViewModel: ObservableObject {
                 } else {
                     print("Tokens value is not available.")
                 }
-
-                // Fetch hoursDriven
-                if let hoursDriven = userData["hoursDriven"] as? Double {
-                    self.hoursDriven = hoursDriven
-                } else {
-                    print("Hours driven value is not available.")
-                }
             } else {
                 print("User data is not available.")
             }
         } withCancel: { error in
             print("Error fetching user data: \(error.localizedDescription)")
-        }
-    }
-
-    // Function to handle logout
-    func handleLogout(completion: @escaping () -> Void) {
-        do {
-            try Auth.auth().signOut()  // Sign out from Firebase
-            completion() // Notify the view that logout is successful
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError.localizedDescription)
         }
     }
 }

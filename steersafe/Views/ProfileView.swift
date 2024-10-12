@@ -13,17 +13,24 @@ struct ProfileView: View {
             VStack(spacing: 20) {
                 
                 HStack {
-                    Image("logo")  // Replace with the actual image name
+                    Image("logo")
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 50) // Adjust the size as needed
-                    Spacer()  // Pushes the image to the left
+                        .frame(height: 50)
+                    Spacer()
                 }
                 .padding(.horizontal)
-
-                // Display tokens and hours driven (assuming these values are available)
-                Text("Tokens: \(profileViewModel.tokens)")
-                    .font(.title2)
+                
+                HStack {
+                    Text("profile")
+                        .font(Font.inriaSans(size: 30))
+                        .foregroundColor(Color(red: 0.23, green: 0.86, blue: 0.57))
+                    
+                    Spacer()
+                    
+                    BalanceView(balance: profileViewModel.tokens)
+                }
+                .padding(.horizontal, 30)
                 
                 Text("Hours Driven: \(formattedTime)")
                     .font(.title2)
