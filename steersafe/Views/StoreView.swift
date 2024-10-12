@@ -37,13 +37,13 @@ struct StoreView: View {
                 
                 ZStack {
                     ScrollView {
-                        VStack(spacing: 20) {
+                        VStack(spacing: 0) {
                             // Insert the QuestView at the top of the scrollable content
                             QuestView()
                                 .padding(.horizontal)
 
                             // LazyVGrid for coupons
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 20) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 0) {
                                 ForEach(viewModel.coupons) { coupon in
                                     StoreItemView(
                                         company: coupon.company,
