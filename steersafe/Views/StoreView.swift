@@ -9,7 +9,7 @@ struct StoreView: View {
     @State private var redeemedCode: String = ""
     @State private var redeemedCompany: String = ""
     @State private var redeemedCouponValue: String = ""
-    @State private var redeemeCoinCost: String = ""
+    @State private var redeemedCoinCost: String = ""
     
     var body: some View {
         ZStack {
