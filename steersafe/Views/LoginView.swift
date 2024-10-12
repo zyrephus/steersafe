@@ -116,7 +116,7 @@ struct LoginView: View {
                 Spacer()
 
                 // Navigate to HomePageView when logged in
-                NavigationLink(destination: HomePageView(), isActive: $isLoggedIn) {
+                NavigationLink(destination: ContentView2().navigationBarBackButtonHidden(true), isActive: $isLoggedIn) {
                     EmptyView()
                 }
             }

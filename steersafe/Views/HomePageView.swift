@@ -60,55 +60,6 @@ struct HomePageView: View {
 
 
             Spacer()
-
-            // Bottom tab bar
-            HStack {
-                // Home icon
-                Button(action: {
-                    // Home action
-                }) {
-                    Image("green_wheel")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                }
-
-                Spacer(minLength: 40)
-
-                // Market icon
-                Button(action: {
-                    // Market action
-                }) {
-                    Image("market")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                }
-
-                Spacer(minLength: 40)
-
-                // Leaderboard icon
-                Button(action: {
-                    // Leaderboard action
-                }) {
-                    Image("leaderboard")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                }
-
-                Spacer(minLength: 40)
-
-                // Profile icon
-                Button(action: {
-                    // Profile action
-                }) {
-                    Image("profile")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                }
-            }
-            .padding(.horizontal, 20)
-            .frame(maxWidth: .infinity)
-            .cornerRadius(20)
-            .padding(.horizontal, 20)
         }
         .padding()
         .onDisappear {
