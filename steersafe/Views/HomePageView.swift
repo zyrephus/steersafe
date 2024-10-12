@@ -18,9 +18,9 @@ struct HomePageView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-
+                
                 Spacer()
-
+                
                 // Stopwatch Text, shows elapsed time if driving, otherwise shows placeholder
                 if viewModel.isDriving {
                     Text(formattedTime(viewModel.time))
@@ -31,7 +31,7 @@ struct HomePageView: View {
                         .font(.system(size: 48, weight: .bold, design: .monospaced))
                         .padding(.bottom, 10)
                 }
-
+                
                 // Steering Wheel Button with z-axis monitoring
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.5)) {
@@ -51,18 +51,18 @@ struct HomePageView: View {
                 }
                 .background(Color.gray.opacity(0.3))
                 .cornerRadius(100)
-
+                
                 // Dynamic Text under the wheel
                 Text(viewModel.isWarningVisible ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
                     .font(.system(size: 20))
                     .multilineTextAlignment(.center)
                     .padding(.top, 10)
                     .foregroundColor(viewModel.isWarningVisible ? .red : (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))
-
+                
                 Spacer()
             }
-            .padding()
-
+            .padding(.top)  // Changed from .padding() to .padding(.top)
+            
             // Popup overlay with bounce effect
             if showPopup {
                 popupView
@@ -76,14 +76,14 @@ struct HomePageView: View {
             }
         }
     }
-
+    
     // Function to format the elapsed time
     func formattedTime(_ time: TimeInterval) -> String {
         let minutes = Int(time) / 60
         let seconds = Int(time) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-
+    
     // Custom Popup View
     var popupView: some View {
         VStack(spacing: 20) {
@@ -101,12 +101,12 @@ struct HomePageView: View {
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
-
-            Text("📱 you used your phone: \(viewModel.currPickups) time(s)")
+    
+            Text("📱 you used your phone: \(viewModel.pickups) time(s)")
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
-
+    
             Button(action: {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0)) {
                     popupScale = 0.1  // Scale down with bounce effect
@@ -129,7 +129,7 @@ struct HomePageView: View {
         .frame(width: 300)
         .padding(.bottom, 50)
     }
-
+    
     // Function to show popup with initial scale
     func showPopupWithAnimation() {
         popupScale = 0.1  // Start with small scale
