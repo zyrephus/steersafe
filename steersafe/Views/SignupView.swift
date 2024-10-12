@@ -105,8 +105,4 @@ struct SignupView: View {
     }
 }
 
-struct Signup_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupView()
-    }
-}
+
