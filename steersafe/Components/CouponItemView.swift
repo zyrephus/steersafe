@@ -1,17 +1,24 @@
 import SwiftUI
 
 struct StoreItemView: View {
-    var companyName: String
+    var company: String
     var couponValue: String
-    var coinPrice: String
-    var imageName: String
-    var code: String  // New code parameter
-
+    var coinCost: String
+    var image: String
+    var code: String
+    var userTokens: Int
+    
+    @State private var isPressed: Bool = false // Track press state
+    
     var body: some View {
         ZStack {
-            // Rectangle with specified width, height, and corner radius
+            // Darken the first RoundedRectangle when pressed
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255))
+                .fill(
+                    isPressed ?
+                    (userTokens >= Int(coinCost) ?? 0 ? Color(red: 150 / 255, green: 180 / 255, blue: 174 / 255) : Color.red.opacity(0.7)) :
+                    (userTokens >= Int(coinCost) ?? 0 ? Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255) : Color.red)
+                )
                 .frame(width: 175, height: 160)  // Set width and height
             
             // Inner Rectangle
@@ -20,7 +27,7 @@ struct StoreItemView: View {
                 .frame(width: 155, height: 120)
                 .offset(y: -10)
             
-            Image(imageName)
+            Image(image)
                 .resizable()
                 .frame(width: 80, height: 80)
             
@@ -32,7 +39,7 @@ struct StoreItemView: View {
             
             // Price in coins
             HStack {
-                Text(coinPrice)
+                Text(coinCost)
                     .font(Font.inriaSans(size: 20))
                     .foregroundColor(.white)
                 Image("coin")
@@ -43,17 +50,21 @@ struct StoreItemView: View {
             .offset(x: +10, y: +64)
         }
         .padding()
+        .onLongPressGesture(minimumDuration: 0.01, pressing: { isPressing in
+            isPressed = isPressing // Update press state when pressed or released
+        }, perform: {})
     }
 }
 
 struct StoreItemView_Previews: PreviewProvider {
     static var previews: some View {
         StoreItemView(
-            companyName: "McDonald's",
+            company: "McDonald's",
             couponValue: "$25",
-            coinPrice: "250",
-            imageName: "mcdonalds",
-            code: "1234567890qwerty"
+            coinCost: "250",
+            image: "mcdonalds",
+            code: "1234567890qwerty",
+            userTokens: 200
         )
         .previewLayout(.sizeThatFits)
     }
