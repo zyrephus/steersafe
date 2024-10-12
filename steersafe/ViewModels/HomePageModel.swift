@@ -9,8 +9,9 @@ class HomePageModel: ObservableObject {
     @Published var isDriving: Bool = false
     @Published var time: TimeInterval = 0  // Total time in seconds
     @Published var coins: Int = 0           // Total coins earned
-    @Published var zAccel: Double = 0.0  // Track z-axis movement
-    @Published var pickups: Int = 0
+    @Published var zAccel: Double = 0.0     // Track z-axis movement
+    @Published var pickups: Int = 0         // Total pickups across sessions
+    @Published var currPickups: Int = 0     // Pickups during the current session
     @Published var isWarningVisible: Bool = false  // Show warning for 5 seconds
 
     private var lastPickupTime: Date?  // Track the last time a pickup was registered
@@ -32,6 +33,7 @@ class HomePageModel: ObservableObject {
         print("started driving")
         isDriving = true
         time = 0
+        currPickups = 0  // Reset currPickups for the current session
         startTime = Date()  // Set start time when driving begins
 
         // Start a timer to update elapsed time every second
@@ -104,8 +106,9 @@ class HomePageModel: ObservableObject {
     // Helper function to register a pickup and update the timestamp
     private func registerPickup(_ currentTime: Date) {
         pickups += 1
+        currPickups += 1  // Increment the pickups for the current session
         lastPickupTime = currentTime
-        print("Pickups: \(pickups)")
+        print("Total Pickups: \(pickups), Current Session Pickups: \(currPickups)")
         showWarning()  // Show warning when a pickup is detected
     }
 
@@ -140,7 +143,7 @@ class HomePageModel: ObservableObject {
                 // Fetch existing hours driven
                 if let hoursDriven = userData["hoursDriven"] as? Double {
                     existingHoursDriven = hoursDriven
-                } 
+                }
             }
 
             // Calculate new tokens and hours driven
@@ -160,7 +163,6 @@ class HomePageModel: ObservableObject {
                     print("Error updating user data: \(error.localizedDescription)")
                 } else {
                     print("User data updated successfully!")
-                    // Optionally, update local variables if needed
                 }
             }
         } withCancel: { error in
