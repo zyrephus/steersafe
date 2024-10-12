@@ -122,7 +122,7 @@ class StoreViewModel: ObservableObject {
                 completion(false)
             } else if committed {
                 DispatchQueue.main.async {
-                    self.tokens -= coinCost  // Optimistically update tokens
+                    // self.tokens -= coinCost  // Removed this line
                     completion(true)
                 }
                 print("Tokens updated successfully")
