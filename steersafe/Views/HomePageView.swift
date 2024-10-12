@@ -2,8 +2,6 @@ import SwiftUI
 
 struct HomePageView: View {
     @ObservedObject var viewModel = HomePageModel()
-    @State private var startTime = Date()  // Track the start time of driving
-    @State private var timer: Timer?       // Timer to update the stopwatch
 
     var body: some View {
         VStack(spacing: 20) {
@@ -19,7 +17,7 @@ struct HomePageView: View {
 
             Spacer()
 
-            // Placeholder for stopwatch to reserve space and avoid shifting
+            // Stopwatch Text, shows elapsed time if driving, otherwise shows placeholder
             if viewModel.isDriving {
                 Text(formattedTime(viewModel.time))
                     .font(.system(size: 48, weight: .bold, design: .monospaced))
@@ -30,18 +28,13 @@ struct HomePageView: View {
                     .padding(.bottom, 10)
             }
 
-            // Steering Wheel Button with transition
+            // Steering Wheel Button with z-axis monitoring
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.5)) {
-                    viewModel.isDriving.toggle()
-                    if viewModel.isDriving {
-                        startDriving()  // Start driving mode and timer
-                    } else {
-                        stopDriving()   // Stop driving mode and timer
-                    }
+                    viewModel.toggleDriving()  // Toggle driving state
                 }
             }) {
-                // Conditionally render either the red wheel, grey wheel, or green wheel based on z-axis movement and driving state
+                // Display red if z-axis rotation is too high (using phone), otherwise green or grey based on state
                 Image(viewModel.zAxisRotationRate > 1.0 ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
                     .resizable()
                     .frame(width: 200, height: 200)
@@ -50,7 +43,7 @@ struct HomePageView: View {
             .background(Color.gray.opacity(0.3))
             .cornerRadius(100)
 
-            // Centered Text, changes based on z-axis movement and driving state
+            // Dynamic Text under the wheel, red if phone detected, otherwise green or grey
             Text(viewModel.zAxisRotationRate > 1.0 ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
                 .font(.system(size: 20))
                 .multilineTextAlignment(.center)
@@ -60,9 +53,6 @@ struct HomePageView: View {
             Spacer()
         }
         .padding()
-        .onDisappear {
-            stopDriving()  // Stop timer if the user navigates away
-        }
     }
 
     // Function to format the elapsed time
@@ -71,21 +61,6 @@ struct HomePageView: View {
         let seconds = Int(time) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-
-    // Function to start the driving timer
-    func startDriving() {
-        startTime = Date()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            viewModel.time = Date().timeIntervalSince(startTime)
-        }
-    }
-
-    // Function to stop the driving timer
-    func stopDriving() {
-        timer?.invalidate()  // Stop the timer
-        timer = nil
-        viewModel.stopDriving()  // Perform the coin calculation and stop driving logic
-    }
 }
 
 struct HomePageView_Previews: PreviewProvider {
@@ -93,4 +68,3 @@ struct HomePageView_Previews: PreviewProvider {
         HomePageView()
     }
 }
-
