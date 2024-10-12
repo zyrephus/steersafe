@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7FF15F2CBB3E7500CCF7C5 /* TomTomSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF15E2CBB3E7500CCF7C5 /* TomTomSDKCommon */; };
+		1E7FF1612CBB3E7500CCF7C5 /* TomTomSDKCommonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1602CBB3E7500CCF7C5 /* TomTomSDKCommonUI */; };
+		1E7FF1632CBB3E7500CCF7C5 /* TomTomSDKDynamicData in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1622CBB3E7500CCF7C5 /* TomTomSDKDynamicData */; };
+		1E7FF1652CBB3E7500CCF7C5 /* TomTomSDKDynamicDataOnline in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1642CBB3E7500CCF7C5 /* TomTomSDKDynamicDataOnline */; };
+		1E7FF1672CBB3E7500CCF7C5 /* TomTomSDKLocationProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1662CBB3E7500CCF7C5 /* TomTomSDKLocationProvider */; };
+		1E7FF1692CBB3E7500CCF7C5 /* TomTomSDKMapDisplay in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1682CBB3E7500CCF7C5 /* TomTomSDKMapDisplay */; };
+		1E7FF16B2CBB3E7500CCF7C5 /* TomTomSDKPersonalData in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF16A2CBB3E7500CCF7C5 /* TomTomSDKPersonalData */; };
+		1E7FF16D2CBB3E7500CCF7C5 /* TomTomSDKRoute in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF16C2CBB3E7500CCF7C5 /* TomTomSDKRoute */; };
+		1E7FF16F2CBB3E7500CCF7C5 /* TomTomSDKRoutePlanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF16E2CBB3E7500CCF7C5 /* TomTomSDKRoutePlanner */; };
+		1E7FF1712CBB3E7500CCF7C5 /* TomTomSDKSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1702CBB3E7500CCF7C5 /* TomTomSDKSearch */; };
+		1E7FF1732CBB3E7500CCF7C5 /* TomTomSDKTraffic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7FF1722CBB3E7500CCF7C5 /* TomTomSDKTraffic */; };
 		AB8AAEFB2CB9FDF700125140 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */; };
 		AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */; };
 		AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */; };
@@ -67,9 +78,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7FF1652CBB3E7500CCF7C5 /* TomTomSDKDynamicDataOnline in Frameworks */,
+				1E7FF1672CBB3E7500CCF7C5 /* TomTomSDKLocationProvider in Frameworks */,
+				1E7FF15F2CBB3E7500CCF7C5 /* TomTomSDKCommon in Frameworks */,
+				1E7FF16B2CBB3E7500CCF7C5 /* TomTomSDKPersonalData in Frameworks */,
+				1E7FF1692CBB3E7500CCF7C5 /* TomTomSDKMapDisplay in Frameworks */,
 				AB8AAEFB2CB9FDF700125140 /* FirebaseAnalytics in Frameworks */,
 				AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */,
+				1E7FF16D2CBB3E7500CCF7C5 /* TomTomSDKRoute in Frameworks */,
+				1E7FF16F2CBB3E7500CCF7C5 /* TomTomSDKRoutePlanner in Frameworks */,
+				1E7FF1732CBB3E7500CCF7C5 /* TomTomSDKTraffic in Frameworks */,
 				ABAF8AF42CBAA5250081BACF /* FirebaseDatabase in Frameworks */,
+				1E7FF1612CBB3E7500CCF7C5 /* TomTomSDKCommonUI in Frameworks */,
+				1E7FF1712CBB3E7500CCF7C5 /* TomTomSDKSearch in Frameworks */,
+				1E7FF1632CBB3E7500CCF7C5 /* TomTomSDKDynamicData in Frameworks */,
 				AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +161,17 @@
 				AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */,
 				AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */,
 				ABAF8AF32CBAA5250081BACF /* FirebaseDatabase */,
+				1E7FF15E2CBB3E7500CCF7C5 /* TomTomSDKCommon */,
+				1E7FF1602CBB3E7500CCF7C5 /* TomTomSDKCommonUI */,
+				1E7FF1622CBB3E7500CCF7C5 /* TomTomSDKDynamicData */,
+				1E7FF1642CBB3E7500CCF7C5 /* TomTomSDKDynamicDataOnline */,
+				1E7FF1662CBB3E7500CCF7C5 /* TomTomSDKLocationProvider */,
+				1E7FF1682CBB3E7500CCF7C5 /* TomTomSDKMapDisplay */,
+				1E7FF16A2CBB3E7500CCF7C5 /* TomTomSDKPersonalData */,
+				1E7FF16C2CBB3E7500CCF7C5 /* TomTomSDKRoute */,
+				1E7FF16E2CBB3E7500CCF7C5 /* TomTomSDKRoutePlanner */,
+				1E7FF1702CBB3E7500CCF7C5 /* TomTomSDKSearch */,
+				1E7FF1722CBB3E7500CCF7C5 /* TomTomSDKTraffic */,
 			);
 			productName = steersafe;
 			productReference = AB8AAE982CB9D9B400125140 /* steersafe.app */;
@@ -224,6 +257,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AB8AAE992CB9D9B400125140 /* Products */;
@@ -589,6 +623,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tomtom-international/tomtom-sdk-spm-core";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.64.0;
+			};
+		};
 		AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -600,6 +642,61 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E7FF15E2CBB3E7500CCF7C5 /* TomTomSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKCommon;
+		};
+		1E7FF1602CBB3E7500CCF7C5 /* TomTomSDKCommonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKCommonUI;
+		};
+		1E7FF1622CBB3E7500CCF7C5 /* TomTomSDKDynamicData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKDynamicData;
+		};
+		1E7FF1642CBB3E7500CCF7C5 /* TomTomSDKDynamicDataOnline */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKDynamicDataOnline;
+		};
+		1E7FF1662CBB3E7500CCF7C5 /* TomTomSDKLocationProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKLocationProvider;
+		};
+		1E7FF1682CBB3E7500CCF7C5 /* TomTomSDKMapDisplay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKMapDisplay;
+		};
+		1E7FF16A2CBB3E7500CCF7C5 /* TomTomSDKPersonalData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKPersonalData;
+		};
+		1E7FF16C2CBB3E7500CCF7C5 /* TomTomSDKRoute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKRoute;
+		};
+		1E7FF16E2CBB3E7500CCF7C5 /* TomTomSDKRoutePlanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKRoutePlanner;
+		};
+		1E7FF1702CBB3E7500CCF7C5 /* TomTomSDKSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKSearch;
+		};
+		1E7FF1722CBB3E7500CCF7C5 /* TomTomSDKTraffic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E7FF15D2CBB3E7500CCF7C5 /* XCRemoteSwiftPackageReference "tomtom-sdk-spm-core" */;
+			productName = TomTomSDKTraffic;
+		};
 		AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
