@@ -8,6 +8,10 @@ struct ProfileView: View {
         let hours = Int(profileViewModel.hoursDriven)
         let minutes = Int((profileViewModel.hoursDriven - Double(hours)) * 60)
         let formattedTime = String(format: "%dh %02dm", hours, minutes)
+        
+        let lastHours = Int(profileViewModel.lastHoursDriven)
+        let lastMinutes = Int((profileViewModel.lastHoursDriven - Double(lastHours)) * 60)
+        let lastFormattedTime = String(format: "%dh %02dm", lastHours, lastMinutes)
 
         NavigationStack {
             VStack(spacing: 20) {
@@ -42,9 +46,10 @@ struct ProfileView: View {
                             .font(Font.inriaSans(size: 18))
                             .foregroundColor(Color(red: 0.23, green: 0.86, blue: 0.57))
                         
-                        Text("30 min, 15 coins")
+                        Text("\(lastFormattedTime), \(profileViewModel.lastTokens) coins")
                             .font(Font.inriaSans(size: 16))
                             .foregroundColor(.black)
+
                     }
                     
                     Spacer()

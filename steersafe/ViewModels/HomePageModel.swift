@@ -154,7 +154,9 @@ class HomePageModel: ObservableObject {
             // Prepare updated user data
             let updatedUserData: [String: Any] = [
                 "tokens": newTokens,
-                "hoursDriven": newHoursDriven
+                "hoursDriven": newHoursDriven,
+                "lastTokens": self.coins,
+                "lastHoursDriven": hoursThisSession
             ]
 
             // Update the user's data in Firebase Realtime Database
