@@ -1,12 +1,4 @@
 import SwiftUI
-import Firebase
-import FirebaseAuth
-
-extension Font {
-    static func inriaSans(size: CGFloat) -> Font {
-        return Font.custom("InriaSans-Regular", size: size)
-    }
-}
 
 struct LoginView: View {
     // Use the view model to handle login logic
@@ -29,8 +21,8 @@ struct LoginView: View {
             Image("lady") // Replace with your actual image name
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
-                .padding(.bottom, 40)
+                .frame(height: 300)
+                .padding(.bottom, 20)
 
             // Email TextField
             TextField("email", text: $viewModel.email)
@@ -121,4 +113,3 @@ struct LoginView: View {
         .padding()
     }
 }
-
