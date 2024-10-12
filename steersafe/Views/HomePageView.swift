@@ -35,7 +35,7 @@ struct HomePageView: View {
                 }
             }) {
                 // Display red if z-axis rotation is too high (using phone), otherwise green or grey based on state
-                Image(viewModel.zAxisRotationRate > 1.0 ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
+                Image(viewModel.zAccel > 1.0 ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
                     .resizable()
                     .frame(width: 200, height: 200)
                     .transition(.scale)  // Smooth scaling transition
@@ -44,11 +44,11 @@ struct HomePageView: View {
             .cornerRadius(100)
 
             // Dynamic Text under the wheel, red if phone detected, otherwise green or grey
-            Text(viewModel.zAxisRotationRate > 1.0 ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
+            Text(viewModel.zAccel > 1.0 ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
                 .font(.system(size: 20))
                 .multilineTextAlignment(.center)
                 .padding(.top, 10)
-                .foregroundColor(viewModel.zAxisRotationRate > 1.0 ? .red : (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))  // Red if using phone, green if driving, gray otherwise
+                .foregroundColor(viewModel.zAccel > 1.0 ? .red : (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))  // Red if using phone, green if driving, gray otherwise
 
             Spacer()
         }

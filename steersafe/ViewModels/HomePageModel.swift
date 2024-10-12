@@ -8,7 +8,7 @@ class HomePageModel: ObservableObject {
     @Published var isDriving: Bool = false
     @Published var time: TimeInterval = 0  // Total time in seconds
     @Published var coins: Int = 0           // Total coins earned
-    @Published var zAxisRotationRate: Double = 0.0  // Track z-axis movement
+    @Published var zAccel: Double = 0.0  // Track z-axis movement
     @Published var pickups: Int = 0
     private var lastPickupTime: Date?  // Track the last time a pickup was registered
     private var startTime: Date?            // Track when driving started
@@ -37,7 +37,7 @@ class HomePageModel: ObservableObject {
             }
         }
 
-        startGyroscopeUpdates()  // Start monitoring the gyroscope when driving starts
+        startAccelUpdates()  // Start monitoring the accelerometer when driving starts
     }
 
     // Function to stop driving mode
@@ -45,31 +45,33 @@ class HomePageModel: ObservableObject {
         print("stopped driving")
         isDriving = false
         coins = Int(time) / 120  // Calculate 1 coin per 2 minutes of driving
-        stopGyroscopeUpdates()   // Stop monitoring the gyroscope when driving ends
+        stopAccelUpdates()   // Stop monitoring the accelerometer when driving ends
 
         // Invalidate the timer
         timer?.invalidate()
         timer = nil
     }
 
-    // Function to start receiving gyroscope updates
-    func startGyroscopeUpdates() {
-        print("started measuring gyro")
-        if motionManager.isGyroAvailable {
-            print("gyro available")
-            motionManager.gyroUpdateInterval = 0.1  // Update interval
+    // Function to start receiving accelerometer updates
+    func startAccelUpdates() {
+        print("started measuring accel")
+        if motionManager.isAccelerometerAvailable {
+            print("accel available")
+            motionManager.accelerometerUpdateInterval = 0.1  // Update interval
 
-            // Start updates for gyroscope data
-            motionManager.startGyroUpdates(to: OperationQueue.main) { [weak self] data, error in
-                if let gyroData = data {
-                    // Update the z-axis rotation rate
-                    self?.zAxisRotationRate = gyroData.rotationRate.z
+            // Start updates for accelerometer data
+            motionManager.startAccelerometerUpdates(to: OperationQueue.main) { [weak self] data, error in
+                if let accelerometerData = data {
+                    // Update the z-axis acceleration value
+                    self?.zAccel = accelerometerData.acceleration.z
 
-                    // Check if the phone is being rotated too much (e.g., user picks up the phone)
-                    if abs(gyroData.rotationRate.z) > 0.5 {
+                    // Check if the phone is being moved too much (e.g., user picks up the phone)
+                    let movementThreshold = 0.1  // Set a reasonable threshold for detecting a phone pickup
+                    
+                    if accelerometerData.acceleration.z > movementThreshold {
                         let now = Date()
                         if let lastPickup = self?.lastPickupTime {
-                            // Check if 0.5 seconds (500 milliseconds) have passed since the last pickup
+                            // Check if 5 seconds have passed since the last pickup to debounce the input
                             if now.timeIntervalSince(lastPickup) > 5.0 {
                                 self?.registerPickup(now)
                             }
@@ -79,17 +81,17 @@ class HomePageModel: ObservableObject {
                         }
                     }
                 } else if let error = error {
-                    print("Gyroscope error: \(error.localizedDescription)")
+                    print("Accelerometer error: \(error.localizedDescription)")
                 }
             }
         } else {
-            print("Gyroscope is not available.")
+            print("Accelerometer is not available.")
         }
     }
 
-    // Function to stop gyroscope updates
-    func stopGyroscopeUpdates() {
-        motionManager.stopGyroUpdates()
+    // Function to stop accelerometer updates
+    func stopAccelUpdates() {
+        motionManager.stopAccelerometerUpdates()
     }
 
     // Helper function to register a pickup and update the timestamp
