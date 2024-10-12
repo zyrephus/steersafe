@@ -1,0 +1,30 @@
+[
+    {
+        "company": "McDonald's",
+        "discount": "$25",
+        "coinCost": "250",
+        "imageName": "mcdonalds",
+        "code": "vk40bz2cj39v2ckso3c"
+    },
+    {
+        "company": "Dunkin' Donuts",
+        "discount": "$15",
+        "coinCost": "150",
+        "imageName": "dunkin",
+        "code": "vk40bz2cj39v2ckso3c"
+    },
+    {
+        "company": "Chipotle",
+        "discount": "$15",
+        "coinCost": "150",
+        "imageName": "chipotle",
+        "code": "vk40bz2cj39v2ckso3c"
+    },
+    {
+        "company": "Visa",
+        "discount": "$10",
+        "coinCost": "100",
+        "imageName": "visa",
+        "code": "vk40bz2cj39v2ckso3c"
+    },
+]
