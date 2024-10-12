@@ -7,7 +7,8 @@ struct ProfileView: View {
     var body: some View {
         let hours = Int(profileViewModel.hoursDriven)
         let minutes = Int((profileViewModel.hoursDriven - Double(hours)) * 60)
-        let formattedTime = String(format: "%02d:%02d", hours, minutes)
+        let formattedTime = String(format: "%02dh %02dm", hours, minutes)
+
 
         NavigationStack {
             VStack(spacing: 20) {
@@ -32,8 +33,11 @@ struct ProfileView: View {
                 }
                 .padding(.horizontal, 30)
                 
-                Text("Hours Driven: \(formattedTime)")
-                    .font(.title2)
+                Text("🚘 last trip: \(formattedTime)")
+                    .font(Font.inriaSans(size: 18))
+                
+                Text("⏰ hours driven: \(formattedTime)")
+                    .font(Font.inriaSans(size: 18))
 
 
                 // Logout button
@@ -62,5 +66,11 @@ struct ProfileView: View {
             .padding()
             .navigationBarHidden(true)
         }
+    }
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView()
     }
 }
