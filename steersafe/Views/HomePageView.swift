@@ -38,7 +38,7 @@ struct HomePageView: View {
                         viewModel.toggleDriving()  // Toggle driving state
                         if !viewModel.isDriving {
                             // Show popup with tokens and duration after the drive ends
-                            tokensEarned = viewModel.coins
+                            tokensEarned = viewModel.netCoins
                             driveDuration = viewModel.time
                             showPopupWithAnimation()  // Show popup with bounce effect
                         }
@@ -102,7 +102,7 @@ struct HomePageView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
     
-            Text("📱 you used your phone: \(viewModel.pickups) time(s)")
+            Text("📱 you used your phone: \(viewModel.currPickups) time(s)")
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)

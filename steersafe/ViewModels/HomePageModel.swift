@@ -8,16 +8,17 @@ class HomePageModel: ObservableObject {
     
     @Published var isDriving: Bool = false
     @Published var time: TimeInterval = 0  // Total time in seconds
-    @Published var coins: Int = 0           // Total coins earned
-    @Published var zAccel: Double = 0.0     // Track z-axis movement
-    @Published var pickups: Int = 0         // Total pickups across sessions
-    @Published var currPickups: Int = 0     // Pickups during the current session
+    @Published var coins: Int = 0          // Total coins earned during the session
+    @Published var netCoins: Int = 0       // Net coins after deductions
+    @Published var zAccel: Double = 0.0    // Track z-axis movement
+    @Published var pickups: Int = 0        // Total pickups across sessions
+    @Published var currPickups: Int = 0    // Pickups during the current session
     @Published var isWarningVisible: Bool = false  // Show warning for 5 seconds
 
-    private var lastPickupTime: Date?  // Track the last time a pickup was registered
-    private var startTime: Date?            // Track when driving started
-    private var timer: Timer?               // Timer for elapsed time tracking
-    private var warningTimer: Timer?        // Timer to hide the warning after 5 seconds
+    private var lastPickupTime: Date?      // Track the last time a pickup was registered
+    private var startTime: Date?           // Track when driving started
+    private var timer: Timer?              // Timer for elapsed time tracking
+    private var warningTimer: Timer?       // Timer to hide the warning after 5 seconds
 
     // Toggle driving state
     func toggleDriving() {
@@ -51,6 +52,9 @@ class HomePageModel: ObservableObject {
         print("stopped driving")
         isDriving = false
         coins = Int(time) / 120  // Calculate 1 coin per 2 minutes of driving
+        netCoins = coins - (currPickups / 2)  // Subtract pickups from coins
+        if netCoins < 0 { netCoins = 0 }
+        
         stopAccelUpdates()   // Stop monitoring the accelerometer when driving ends
 
         // Invalidate the timer
@@ -116,7 +120,7 @@ class HomePageModel: ObservableObject {
     private func showWarning() {
         isWarningVisible = true
         warningTimer?.invalidate()  // Invalidate any previous timer
-        warningTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+        warningTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { [weak self] _ in
             self?.isWarningVisible = false
         }
     }
@@ -138,16 +142,32 @@ class HomePageModel: ObservableObject {
                 // Fetch existing tokens
                 if let tokens = userData["tokens"] as? Int {
                     existingTokens = tokens
+                } else if let tokensString = userData["tokens"] as? String, let tokens = Int(tokensString) {
+                    existingTokens = tokens
+                } else if let tokensDouble = userData["tokens"] as? Double {
+                    existingTokens = Int(tokensDouble)
+                } else if let tokensNumber = userData["tokens"] as? NSNumber {
+                    existingTokens = tokensNumber.intValue
+                } else {
+                    existingTokens = 0
                 }
 
                 // Fetch existing hours driven
                 if let hoursDriven = userData["hoursDriven"] as? Double {
                     existingHoursDriven = hoursDriven
+                } else if let hoursDrivenString = userData["hoursDriven"] as? String, let hoursDrivenDouble = Double(hoursDrivenString) {
+                    existingHoursDriven = hoursDrivenDouble
+                } else if let hoursDrivenNumber = userData["hoursDriven"] as? NSNumber {
+                    existingHoursDriven = hoursDrivenNumber.doubleValue
+                } else {
+                    existingHoursDriven = 0.0
                 }
             }
 
-            // Calculate new tokens and hours driven
-            let newTokens = existingTokens + self.coins
+            // Use netCoins calculated in stopDriving()
+            let newTokens = max(0, existingTokens + self.netCoins)
+
+            // Calculate hours driven this session
             let hoursThisSession = self.time / 3600.0  // Convert time from seconds to hours
             let newHoursDriven = existingHoursDriven + hoursThisSession
 
@@ -155,7 +175,7 @@ class HomePageModel: ObservableObject {
             let updatedUserData: [String: Any] = [
                 "tokens": newTokens,
                 "hoursDriven": newHoursDriven,
-                "lastTokens": self.coins,
+                "lastTokens": self.netCoins,
                 "lastHoursDriven": hoursThisSession
             ]
 
