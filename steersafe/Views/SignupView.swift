@@ -20,8 +20,8 @@ struct SignupView: View {
             Image("lady")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
-                .padding(.bottom, 40)
+                .frame(height: 300)
+                .padding(.bottom, 20)
 
             // Email TextField
             TextField("email", text: $viewModel.email)
@@ -162,4 +162,8 @@ struct SignupView: View {
         }
         .padding()
     }
+}
+
+#Preview {
+    SignupView()
 }
