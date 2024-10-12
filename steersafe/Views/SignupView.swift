@@ -159,6 +159,11 @@ struct SignupView: View {
             .navigationBarHidden(true)
 
             Spacer()
+            
+            // Navigate to HomePageView when logged in
+            NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true), isActive: $viewModel.signedUp) {
+                EmptyView()
+            }
         }
         .padding()
     }

@@ -11,6 +11,7 @@
 		AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */; };
 		AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */; };
 		AB8AAF042CBA042000125140 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB8AAF022CB9FF4300125140 /* GoogleService-Info.plist */; };
+		ABAF8AF42CBAA5250081BACF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ABAF8AF32CBAA5250081BACF /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 			files = (
 				AB8AAEFB2CB9FDF700125140 /* FirebaseAnalytics in Frameworks */,
 				AB8AAEFD2CB9FDF700125140 /* FirebaseAuth in Frameworks */,
+				ABAF8AF42CBAA5250081BACF /* FirebaseDatabase in Frameworks */,
 				AB8AAEFF2CB9FDF700125140 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +138,7 @@
 				AB8AAEFA2CB9FDF700125140 /* FirebaseAnalytics */,
 				AB8AAEFC2CB9FDF700125140 /* FirebaseAuth */,
 				AB8AAEFE2CB9FDF700125140 /* FirebaseFirestore */,
+				ABAF8AF32CBAA5250081BACF /* FirebaseDatabase */,
 			);
 			productName = steersafe;
 			productReference = AB8AAE982CB9D9B400125140 /* steersafe.app */;
@@ -611,6 +614,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		ABAF8AF32CBAA5250081BACF /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB8AAEF92CB9FDF700125140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

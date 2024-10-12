@@ -2,7 +2,7 @@ import FirebaseAuth
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
-    @Published var tokens: Int = 0 // Assuming you have these values stored and synced
+    @Published var tokens: Int = 0
     @Published var hoursDriven: Double = 0.0
 
     // Function to handle logout
