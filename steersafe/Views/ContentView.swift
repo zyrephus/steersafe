@@ -23,5 +23,5 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 #Preview {
-    LoginView()
+    ContentView()
 }

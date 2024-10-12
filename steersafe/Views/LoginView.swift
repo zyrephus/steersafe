@@ -1,6 +1,4 @@
 import SwiftUI
-import Firebase
-import FirebaseAuth
 
 extension Font {
     static func inriaSans(size: CGFloat) -> Font {
