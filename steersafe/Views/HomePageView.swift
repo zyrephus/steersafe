@@ -150,8 +150,8 @@ struct HomePageView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.green)
-                    .cornerRadius(10)
+                    .background(Color(red: 58 / 255, green: 220 / 255, blue: 145 / 255))
+                    .cornerRadius(40)
             }
         }
         .padding()
