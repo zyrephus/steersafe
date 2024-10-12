@@ -8,7 +8,7 @@ class LoginViewModel: ObservableObject {
     @Published var isLoading: Bool = false
 
     // Function to handle login using Firebase
-    func handleLogin() {
+    func handleLogin(completion: @escaping (Bool) -> Void) {
         // Reset error state
         loginError = nil
         isLoading = true
@@ -20,9 +20,11 @@ class LoginViewModel: ObservableObject {
                 if let error = error {
                     // Display error message
                     self.loginError = error.localizedDescription
+                    completion(false) // Notify login failed
                 } else {
                     // Successful login logic
                     print("User logged in successfully!")
+                    completion(true) // Notify login success
                 }
             }
         }
