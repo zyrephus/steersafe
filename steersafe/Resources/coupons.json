@@ -1,30 +1,58 @@
 [
     {
         "company": "McDonald's",
-        "discount": "$25",
-        "coinCost": "250",
-        "imageName": "mcdonalds",
-        "code": "vk40bz2cj39v2ckso3c"
+        "couponValue": "$15",
+        "coinCost": "150",
+        "image": "mcdonalds",
+        "code": "bbj0bz2cj39v2ckso3c"
     },
     {
         "company": "Dunkin' Donuts",
-        "discount": "$15",
-        "coinCost": "150",
-        "imageName": "dunkin",
+        "couponValue": "$5",
+        "coinCost": "50",
+        "image": "dunkin",
         "code": "vk40bz2cj39v2ckso3c"
     },
     {
-        "company": "Chipotle",
-        "discount": "$15",
-        "coinCost": "150",
-        "imageName": "chipotle",
+        "company": "StateFarm",
+        "couponValue": "$25",
+        "coinCost": "240",
+        "image": "statefarm",
         "code": "vk40bz2cj39v2ckso3c"
     },
     {
         "company": "Visa",
-        "discount": "$10",
-        "coinCost": "100",
-        "imageName": "visa",
+        "couponValue": "$30",
+        "coinCost": "275",
+        "image": "visa",
         "code": "vk40bz2cj39v2ckso3c"
+    },
+    {
+        "company": "Starbucks",
+        "couponValue": "$10",
+        "coinCost": "100",
+        "image": "starbucks",
+        "code": "dn40bz2vj3fv2vos59c"
+    },
+    {
+        "company": "Amazon",
+        "couponValue": "$50",
+        "coinCost": "400",
+        "image": "amazon",
+        "code": "bz2cbz2mj36j39vs59q"
+    },
+    {
+        "company": "McDonald's",
+        "couponValue": "$25",
+        "coinCost": "240",
+        "image": "mcdonalds",
+        "code": "pb80bv93nvlv2cksc8c"
+    },
+    {
+        "company": "Progressive",
+        "couponValue": "$30",
+        "coinCost": "275",
+        "image": "progressive",
+        "code": "v02jfm9o6mlvc0ks5wi"
     },
 ]
