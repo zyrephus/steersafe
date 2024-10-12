@@ -4,6 +4,10 @@ import FirebaseDatabase
 class ProfileViewModel: ObservableObject {
     @Published var tokens: Int = 0
     @Published var hoursDriven: Double = 0.0
+    @Published var lastTokens: Int = 0
+    @Published var lastHoursDriven: Double = 0.0
+
+    private var ref: DatabaseReference!
 
     init() {
         fetchUserData()
@@ -16,8 +20,10 @@ class ProfileViewModel: ObservableObject {
             return
         }
 
-        let ref = Database.database().reference()
-        ref.child("users").child(uid).observeSingleEvent(of: .value) { snapshot in
+        ref = Database.database().reference().child("users").child(uid)
+
+        // Use observe to continuously monitor changes to the user data
+        ref.observe(.value) { snapshot in
             if let userData = snapshot.value as? [String: Any] {
                 // Fetch tokens
                 if let tokens = userData["tokens"] as? Int {
@@ -31,6 +37,20 @@ class ProfileViewModel: ObservableObject {
                     self.hoursDriven = hoursDriven
                 } else {
                     print("Hours driven value is not available.")
+                }
+                
+                // Fetch last tokens
+                if let lastTokens = userData["lastTokens"] as? Int {
+                    self.lastTokens = lastTokens
+                } else {
+                    print("Last tokens value is not available.")
+                }
+
+                // Fetch last hours driven
+                if let lastHoursDriven = userData["lastHoursDriven"] as? Double {
+                    self.lastHoursDriven = lastHoursDriven
+                } else {
+                    print("Last hours driven value is not available.")
                 }
             } else {
                 print("User data is not available.")

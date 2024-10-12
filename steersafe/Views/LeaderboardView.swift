@@ -13,7 +13,7 @@ struct LeaderboardView: View {
                     .frame(height: 50)
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
 
             // Leaderboard title
             HStack {
@@ -82,6 +82,7 @@ struct LeaderboardView: View {
 
             Spacer()
         }
+        .padding(.top)
         .background(Color.white) // Set the background to white
         .navigationBarTitle("Leaderboard", displayMode: .inline)
     }

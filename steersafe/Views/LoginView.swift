@@ -17,7 +17,8 @@ struct LoginView: View {
                         .frame(height: 50) // Adjust the size as needed
                     Spacer()  // Pushes the image to the left
                 }
-                .padding(.horizontal)
+                // Remove horizontal padding from HStack
+                //.padding(.horizontal, 20) // Remove this line
 
                 // Illustration Image
                 Image("lady") // Replace with your actual image name
@@ -60,7 +61,8 @@ struct LoginView: View {
                             Image(systemName: viewModel.isPasswordVisible ? "eye.slash" : "eye")
                                 .foregroundColor(.gray)
                         }
-                        .padding().padding(.trailing, 15)
+                        .padding()
+                        .padding(.trailing, 15)
                     }
                 }
 
@@ -120,7 +122,7 @@ struct LoginView: View {
                     EmptyView()
                 }
             }
-            .padding()
+            .padding() // Keep side padding
             .navigationBarHidden(true)
         }
     }

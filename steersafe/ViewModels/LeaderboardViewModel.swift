@@ -4,15 +4,18 @@ import FirebaseDatabase
 class LeaderboardViewModel: ObservableObject {
     @Published var topUsers: [User] = []
     
-    private var ref: DatabaseReference = Database.database().reference()
+    private var ref: DatabaseReference!
 
     init() {
-        fetchTopUsers()
+        // Initialize the Firebase reference and start observing
+        ref = Database.database().reference().child("users")
+        observeTopUsers()
     }
 
-    // Function to fetch top 10 users sorted by token count
-    func fetchTopUsers() {
-        ref.child("users").queryOrdered(byChild: "tokens").queryLimited(toLast: 10).observe(.value) { snapshot in
+    // Function to observe top 10 users sorted by token count in real-time
+    func observeTopUsers() {
+        // Query the top 10 users based on token count
+        ref.queryOrdered(byChild: "tokens").queryLimited(toLast: 10).observe(.value) { snapshot in
             var users: [User] = []
             
             for child in snapshot.children.allObjects as? [DataSnapshot] ?? [] {

@@ -33,7 +33,7 @@ struct steersafe: App {
             .animation(.easeInOut(duration: 1.0), value: isActive) // Attach animation to the ZStack
             .onAppear {
                 // Simulate splash screen duration and then transition
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.isActive = true // Trigger transition from SplashScreen to LoginView
                 }
             }
