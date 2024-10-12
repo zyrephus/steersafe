@@ -296,22 +296,22 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     // Location Manager Delegate methods
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.last else { return }
-            lastLocation = location
-            currentLatitude = location.coordinate.latitude
-            currentLongitude = location.coordinate.longitude
-            print("Current Location: \(currentLatitude), \(currentLongitude)")
-            
-            if initialLocation == nil, let currentLocation = lastLocation{
-                initialLocation = currentLocation
-                initialLatitude = currentLocation.coordinate.latitude
-                initialLongitude = currentLocation.coordinate.longitude
-                print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
-            }
-            
-            fetchSpeedLimit()  // Fetch the speed limit whenever the location updates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        lastLocation = location  // Update the last location
+        currentLatitude = location.coordinate.latitude
+        currentLongitude = location.coordinate.longitude
+        print("Current Location: \(currentLatitude), \(currentLongitude)")
+        
+        if initialLocation == nil {
+            initialLocation = lastLocation
+            initialLatitude = currentLatitude
+            initialLongitude = currentLongitude
+            print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
         }
+        
+        fetchSpeedLimit()  // Fetch the speed limit whenever the location updates
+    }
 
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             print("Failed to find user's location: \(error.localizedDescription)")
