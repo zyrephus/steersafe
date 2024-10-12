@@ -10,7 +10,6 @@ struct HomePageView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
-                // Logo at the top
                 HStack {
                     Image("logo")
                         .resizable()
@@ -18,7 +17,7 @@ struct HomePageView: View {
                         .frame(height: 50)
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
 
                 Spacer()
 
@@ -131,16 +130,9 @@ struct HomePageView: View {
         .padding(.bottom, 50)
     }
 
-
     // Function to show popup with initial scale
     func showPopupWithAnimation() {
         popupScale = 0.1  // Start with small scale
         showPopup = true  // Show popup
-    }
-}
-
-struct HomePageView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePageView()
     }
 }

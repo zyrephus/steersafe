@@ -14,7 +14,7 @@ struct SignupView: View {
                     .frame(height: 50)
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
 
             // Illustration Image
             Image("lady")

@@ -13,7 +13,7 @@ struct StoreView: View {
                     .frame(height: 50)
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             
             HStack {
                 Text("shop")
@@ -64,6 +64,7 @@ struct StoreView: View {
                         
             Spacer()
         }
+        .padding(.top)
     }
 }
 

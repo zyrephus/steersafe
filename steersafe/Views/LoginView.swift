@@ -17,7 +17,7 @@ struct LoginView: View {
                         .frame(height: 50) // Adjust the size as needed
                     Spacer()  // Pushes the image to the left
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
 
                 // Illustration Image
                 Image("lady") // Replace with your actual image name
