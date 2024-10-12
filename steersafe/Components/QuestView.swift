@@ -32,9 +32,10 @@ struct QuestView: View {
             ZStack{
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 250)
+                    .frame(height: 20)
                     .background(Color(red: 0.23, green: 0.86, blue: 0.57))
-                                       .cornerRadius(20)
+                    .cornerRadius(40)
                 Text("5/5 Safe Drives Complete")
                     .font(.inriaSans(size: 18))
                     .foregroundColor(.white)
@@ -42,6 +43,7 @@ struct QuestView: View {
             }
             .frame(width: 100, height: 50)
             .padding(.bottom, -20)
+            .offset(y: +7)
 
         }
         .padding()
@@ -54,7 +56,6 @@ struct QuestView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.green.opacity(0.3), lineWidth: 3)
         )
-        .padding()
     }
 }
 

@@ -20,8 +20,8 @@ struct StoreItemView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(
                         isPressed ?
-                        (userTokens >= Int(coinCost) ?? 0 ? Color(red: 150 / 255, green: 180 / 255, blue: 174 / 255) : Color.red.opacity(0.7)) :
-                        (userTokens >= Int(coinCost) ?? 0 ? Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255) : Color.red)
+                        (userTokens >= Int(coinCost) ?? 0 ? Color(red: 150 / 255, green: 180 / 255, blue: 174 / 255) : Color.gray.opacity(0.7)) :
+                        (userTokens >= Int(coinCost) ?? 0 ? Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255) : Color.gray)
                     )
                     .frame(width: 175, height: 160)  // Set width and height
                 
@@ -70,7 +70,7 @@ struct StoreItemView_Previews: PreviewProvider {
             coinCost: "250",
             image: "mcdonalds",
             code: "1234567890qwerty",
-            userTokens: 500,
+            userTokens: 249,
             onRedeem: {}
         )
         .previewLayout(.sizeThatFits)
