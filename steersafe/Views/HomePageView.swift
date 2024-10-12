@@ -4,7 +4,6 @@ struct HomePageView: View {
     @ObservedObject var viewModel = HomePageModel()
     @State private var startTime = Date()  // Track the start time of driving
     @State private var timer: Timer?       // Timer to update the stopwatch
-    @State private var elapsedTime: TimeInterval = 0  // Track the elapsed time
 
     var body: some View {
         VStack(spacing: 20) {
@@ -22,7 +21,7 @@ struct HomePageView: View {
 
             // Placeholder for stopwatch to reserve space and avoid shifting
             if viewModel.isDriving {
-                Text(formattedTime(elapsedTime))
+                Text(formattedTime(viewModel.time))
                     .font(.system(size: 48, weight: .bold, design: .monospaced))
                     .padding(.bottom, 10)
             } else {
@@ -57,7 +56,6 @@ struct HomePageView: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 10)
                 .foregroundColor(viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray)  // Green if driving, gray otherwise
-
 
             Spacer()
 
@@ -126,11 +124,8 @@ struct HomePageView: View {
     // Function to start the driving timer
     func startDriving() {
         startTime = Date()
-        elapsedTime = 0
-
-        // Start a repeating timer to update the elapsed time every second
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            elapsedTime = Date().timeIntervalSince(startTime)
+            viewModel.time = Date().timeIntervalSince(startTime)
         }
     }
 
@@ -138,6 +133,7 @@ struct HomePageView: View {
     func stopDriving() {
         timer?.invalidate()  // Stop the timer
         timer = nil
+        viewModel.stopDriving()  // Perform the coin calculation and stop driving logic
     }
 }
 
