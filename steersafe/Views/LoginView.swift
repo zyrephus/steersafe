@@ -116,5 +116,5 @@ struct LoginView: View {
 
 
 #Preview {
-    LoginView()
+    HomePageView()
 }
