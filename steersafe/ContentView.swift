@@ -9,6 +9,7 @@ extension Font {
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var isPasswordVisible: Bool = false // Track password visibility
 
     var body: some View {
         VStack(spacing: 20) {
@@ -36,12 +37,37 @@ struct LoginView: View {
                 .cornerRadius(20)
                 .font(Font.inriaSans(size: 18))
 
-            // Password SecureField
-            SecureField("password", text: $password)
-                .padding()
-                .background(Color(.systemGray5))
-                .cornerRadius(20)
-                .font(Font.inriaSans(size: 18))
+            // Password field with toggle visibility
+            ZStack {
+                if isPasswordVisible {
+                    TextField("password", text: $password)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .cornerRadius(20)
+                        .font(Font.inriaSans(size: 18))
+                        .frame(height: 50)  // Set a fixed height
+                }
+                else {
+                    SecureField("password", text: $password)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .cornerRadius(20)
+                        .font(Font.inriaSans(size: 18))
+                        .frame(height: 50)  
+                }
+                // Eye icon button to toggle password visibility
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isPasswordVisible.toggle()
+                    })
+                    {
+                        Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                            .foregroundColor(.gray)
+                    }
+                    .padding().padding(.trailing, 15)  // Adjust padding to place the button inside the text field
+                }
+            }
 
             // Login Button
             Button(action: {
