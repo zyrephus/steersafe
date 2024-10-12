@@ -6,7 +6,9 @@ struct HomePageView: View {
     @State private var tokensEarned: Int = 0
     @State private var driveDuration: TimeInterval = 0
     @State private var popupScale: CGFloat = 0.1  // Scale effect for the popup
-    
+    @State private var isPulsating = false  // New state variable to control pulsating
+    @State private var isCircleAnimating = false  // Control the circle animation
+
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
@@ -31,27 +33,57 @@ struct HomePageView: View {
                         .font(.system(size: 48, weight: .bold, design: .monospaced))
                         .padding(.bottom, 10)
                 }
-                
-                // Steering Wheel Button with z-axis monitoring
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        viewModel.toggleDriving()  // Toggle driving state
-                        if !viewModel.isDriving {
-                            // Show popup with tokens and duration after the drive ends
-                            tokensEarned = viewModel.netCoins
-                            driveDuration = viewModel.time
-                            showPopupWithAnimation()  // Show popup with bounce effect
-                        }
+
+                // Pulsating button with outer circle animation
+                ZStack {
+                    // Expanding Circle (only animates when driving is active)
+                    if viewModel.isDriving {
+                        Circle()
+                            .fill(Color.green.opacity(0.3))
+                            .frame(width: 175, height: 175)  // Initial size of the circle
+                            .scaleEffect(isCircleAnimating ? 1.8 : 1.0)  // Circle expansion
+                            .opacity(isCircleAnimating ? 0.0 : 1.0)  // Fade out as it expands
+                            .animation(
+                                Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: false),
+                                value: isCircleAnimating
+                            )
+                            .onAppear {
+                                isCircleAnimating = true  // Start the animation when the view appears
+                            }
+                            .onDisappear {
+                                isCircleAnimating = false  // Stop animation when it disappears
+                            }
                     }
-                }) {
-                    Image(viewModel.isWarningVisible ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
-                        .resizable()
-                        .frame(width: 200, height: 200)
-                        .transition(.scale)
+
+                    // Steering Wheel Button with z-axis monitoring
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            viewModel.toggleDriving()  // Toggle driving state
+                            if !viewModel.isDriving {
+                                // Show popup with tokens and duration after the drive ends
+                                tokensEarned = viewModel.coins
+                                driveDuration = viewModel.time
+                                showPopupWithAnimation()  // Show popup with bounce effect
+                            }
+                        }
+                    }) {
+                        Image(viewModel.isWarningVisible ? "getoffyourphone" : (viewModel.isDriving ? "greenhomewheel" : "greysteeringwheel"))
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .transition(.scale)
+                            .scaleEffect(isPulsating ? 1.05 : 1.0)  // Pulsating effect
+                            .animation(
+                                Animation.easeInOut(duration: 1.0) // Smooth in/out transition
+                                    .repeatForever(autoreverses: true), value: isPulsating // Continuous animation
+                            )
+                            .onAppear {
+                                isPulsating = true  // Start pulsating animation when the view appears
+                            }
+                    }
+                    .background(Color.gray.opacity(0.3))
+                    .cornerRadius(100)
                 }
-                .background(Color.gray.opacity(0.3))
-                .cornerRadius(100)
-                
+
                 // Dynamic Text under the wheel
                 Text(viewModel.isWarningVisible ? "get off your phone!" : (viewModel.isDriving ? "stay focused" : "tap the wheel to start"))
                     .font(.system(size: 20))
@@ -134,5 +166,11 @@ struct HomePageView: View {
     func showPopupWithAnimation() {
         popupScale = 0.1  // Start with small scale
         showPopup = true  // Show popup
+    }
+}
+
+struct HomePageView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomePageView()
     }
 }
