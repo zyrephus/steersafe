@@ -163,7 +163,3 @@ struct SignupView: View {
         .padding()
     }
 }
-
-#Preview {
-    SignupView()
-}
