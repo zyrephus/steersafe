@@ -2,7 +2,6 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-
 extension Font {
     static func inriaSans(size: CGFloat) -> Font {
         return Font.custom("InriaSans-Regular", size: size)
@@ -10,11 +9,9 @@ extension Font {
 }
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var isPasswordVisible: Bool = false // Track password visibility
-    @State private var loginError: String? = nil // Track error for login
-    @State private var isLoading: Bool = false // Track loading state
+    // Use the view model to handle login logic
+    @StateObject private var viewModel = LoginViewModel()
+    @State private var isSignUpPresented = false  // Control sign-up view presentation
 
     var body: some View {
         VStack(spacing: 20) {
@@ -35,8 +32,8 @@ struct LoginView: View {
                 .frame(height: 200)
                 .padding(.bottom, 40)
 
-            // Username TextField
-            TextField("email", text: $email)
+            // Email TextField
+            TextField("email", text: $viewModel.email)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(20)
@@ -45,16 +42,15 @@ struct LoginView: View {
 
             // Password field with toggle visibility
             ZStack {
-                if isPasswordVisible {
-                    TextField("password", text: $password)
+                if viewModel.isPasswordVisible {
+                    TextField("password", text: $viewModel.password)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(20)
                         .font(Font.inriaSans(size: 18))
-                        .frame(height: 50)  // Set a fixed height
-                }
-                else {
-                    SecureField("password", text: $password)
+                        .frame(height: 50)
+                } else {
+                    SecureField("password", text: $viewModel.password)
                         .padding()
                         .background(Color(.systemGray5))
                         .cornerRadius(20)
@@ -65,18 +61,17 @@ struct LoginView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        isPasswordVisible.toggle()
-                    })
-                    {
-                        Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                        viewModel.isPasswordVisible.toggle()
+                    }) {
+                        Image(systemName: viewModel.isPasswordVisible ? "eye.slash" : "eye")
                             .foregroundColor(.gray)
                     }
-                    .padding().padding(.trailing, 15)  // Adjust padding to place the button inside the text field
+                    .padding().padding(.trailing, 15)
                 }
             }
 
             // Display error message if login fails
-            if let loginError = loginError {
+            if let loginError = viewModel.loginError {
                 Text(loginError)
                     .foregroundColor(.red)
                     .font(.footnote)
@@ -85,9 +80,9 @@ struct LoginView: View {
 
             // Login Button
             Button(action: {
-                handleLogin() // Call the login function
+                viewModel.handleLogin() // Call the login function in ViewModel
             }) {
-                if isLoading {
+                if viewModel.isLoading {
                     ProgressView() // Show loading spinner during login
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -103,55 +98,26 @@ struct LoginView: View {
                         .font(Font.inriaSans(size: 18))
                 }
             }
-            .disabled(isLoading) // Disable button while loading
+            .disabled(viewModel.isLoading)
 
-            // Sign-up text
+            // Sign-up text with NavigationLink to SignupView
             HStack {
                 Text("don't have an account?")
-                    .font(Font.inriaSans(size: 16))
-                    .foregroundColor(.gray)
-                Button(action: {
-                    // Handle sign-up action
-                }) {
+                .font(Font.inriaSans(size: 16))
+                .foregroundColor(.gray)
+
+                // Full-page transition to SignUpView using NavigationLink
+                NavigationLink(destination: SignupView()) {
                     Text("sign up!")
-                        .font(Font.inriaSans(size: 16))
-                        .foregroundColor(Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)))
+                    .font(Font.inriaSans(size: 16))
+                    .foregroundColor(Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)))
                 }
             }
             .padding(.top, 10)
+            .navigationBarHidden(true)
 
             Spacer()
         }
         .padding()
     }
-
-    // MARK: - Handle Login with Firebase
-    func handleLogin() {
-        // Reset error state
-        loginError = nil
-        isLoading = true
-
-        // Firebase Authentication
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            isLoading = false // Stop the loading indicator
-
-            if let error = error {
-                // Display error message
-                loginError = error.localizedDescription
-            } else {
-                // Successful login, handle what happens next (e.g., navigate to home screen)
-                print("User logged in successfully!")
-            }
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
-
-#Preview {
-    LoginView()
 }
