@@ -7,6 +7,8 @@ struct SignupView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
+                Spacer(minLength: 50)
+                
                 // Logo at the top
                 HStack {
                     Image("logo")  // Replace with the actual image name
@@ -168,5 +170,11 @@ struct SignupView: View {
             .padding() // Apply padding to all sides, including horizontal
             .navigationBarHidden(true)
         }
+    }
+}
+
+struct SignupView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignupView()
     }
 }
