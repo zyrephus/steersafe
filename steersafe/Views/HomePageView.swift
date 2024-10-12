@@ -9,7 +9,7 @@ struct HomePageView: View {
         VStack(spacing: 20) {
             // Logo at the top
             HStack {
-                Image("logo")  // Replace with the actual image name
+                Image("logo")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 50)
