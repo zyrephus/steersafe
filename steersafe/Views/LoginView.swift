@@ -1,11 +1,5 @@
 import SwiftUI
 
-extension Font {
-    static func inriaSans(size: CGFloat) -> Font {
-        return Font.custom("InriaSans-Regular", size: size)
-    }
-}
-
 struct LoginView: View {
     // Use the view model to handle login logic
     @StateObject private var viewModel = LoginViewModel()
