@@ -1,5 +1,11 @@
 import SwiftUI
 
+extension Font {
+    static func inriaSans(size: CGFloat) -> Font {
+        return Font.custom("InriaSans-Regular", size: size)
+    }
+}
+
 struct ContentView: View {
     @State private var isLoggedIn = false  // Example login state
 
@@ -23,5 +29,5 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 #Preview {
-    LoginView()
+    ContentView()
 }
