@@ -55,14 +55,22 @@ struct StoreView: View {
                                         
                                         // Handle redemption when pressed
                                         onRedeem: {
+                                            print(viewModel.tokens)
+                                            print(Int(coupon.coinCost))
                                             if viewModel.tokens >= Int(coupon.coinCost) ?? 0 {
-                                                // Show popup with the coupon code
-                                                redeemedCode = coupon.code
-                                                redeemedCompany = coupon.company
-                                                redeemedCouponValue = coupon.couponValue
-                                                withAnimation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0)) {
-                                                    showPopup = true
-                                                    popupScale = 1.0
+                                                viewModel.redeemCoupon(coupon: coupon) { success in
+                                                    if success {
+                                                        // Show popup with the coupon code
+                                                        redeemedCode = coupon.code
+                                                        redeemedCompany = coupon.company
+                                                        redeemedCouponValue = coupon.couponValue
+                                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0)) {
+                                                            showPopup = true
+                                                            popupScale = 1.0
+                                                        }
+                                                    } else {
+                                                        print("Redemption failed or not enough tokens")
+                                                    }
                                                 }
                                             } else {
                                                 print("Not enough tokens")
@@ -144,11 +152,5 @@ struct StoreView: View {
         .shadow(radius: 10)
         .frame(width: 300)
         .padding(.bottom, 50)
-    }
-}
-
-struct StoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        StoreView()
     }
 }
