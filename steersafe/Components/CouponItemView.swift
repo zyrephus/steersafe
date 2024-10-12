@@ -24,7 +24,8 @@ struct StoreItemView: View {
                         (userTokens >= Int(coinCost) ?? 0 ? Color(red: 192 / 255, green: 221 / 255, blue: 214 / 255) : Color.gray)
                     )
                     .frame(width: 175, height: 160)  // Set width and height
-                
+                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 5, y: 5)  // Apply shadow
+
                 // Inner Rectangle
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.white)
