@@ -58,7 +58,9 @@ class SignupViewModel: ObservableObject {
         let ref = Database.database().reference()
         let userData: [String: Any] = [
             "tokens": 0,
-            "hoursDriven": 0.0
+            "hoursDriven": 0.0,
+            "lastTokens": 0,
+            "lastHoursDriven": 0.0
         ]
 
         ref.child("users").child(uid).setValue(userData) { error, _ in
