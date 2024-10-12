@@ -22,14 +22,44 @@ struct StoreView: View {
                 
                 Spacer()
                 
-                BalanceView(balance: viewModel.tokens) 
+                BalanceView(balance: viewModel.tokens)
             }
             .padding(.horizontal, 30)
             
+            ZStack {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 20) {
+                        ForEach(viewModel.coupons) { coupon in
+                            StoreItemView(
+                                company: coupon.company,
+                                couponValue: coupon.couponValue,
+                                coinCost: coupon.coinCost,
+                                image: coupon.image,
+                                code: coupon.code,
+                                userTokens: viewModel.tokens
+                            )
+                        }
+                    }
+                    .padding()
+                }
+                
+                // Top shadow
+                VStack {
+                    Rectangle().fill(LinearGradient(
+                        gradient: Gradient(colors: [Color.black.opacity(0.2),Color.clear]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ))
+                        .frame(height: 10)  // Adjust height as needed
+                    Spacer()
+                }
+            }
+                        
             Spacer()
         }
     }
 }
+
 
 struct StoreView_Previews: PreviewProvider {
     static var previews: some View {
