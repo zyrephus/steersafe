@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct StoreView: View {
+    @StateObject private var viewModel = StoreViewModel()
+    
     var body: some View {
         VStack(spacing: 20) {
             // Logo at the top
@@ -20,7 +22,7 @@ struct StoreView: View {
                 
                 Spacer()
                 
-                BalanceView(balance: 945) // Need to send in user's balance
+                BalanceView(balance: viewModel.tokens) 
             }
             .padding(.horizontal, 30)
             

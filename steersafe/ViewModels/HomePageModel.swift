@@ -1,15 +1,17 @@
 import Foundation
 import CoreMotion
-import SwiftUI
+import FirebaseAuth
+import FirebaseDatabase
 
 class HomePageModel: ObservableObject {
     private let motionManager = CMMotionManager()
-
+    
     @Published var isDriving: Bool = false
     @Published var time: TimeInterval = 0  // Total time in seconds
     @Published var coins: Int = 0           // Total coins earned
-    @Published var zAccel: Double = 0.0  // Track z-axis movement
-    @Published var pickups: Int = 0
+    @Published var zAccel: Double = 0.0     // Track z-axis movement
+    @Published var pickups: Int = 0         // Total pickups across sessions
+    @Published var currPickups: Int = 0     // Pickups during the current session
     @Published var isWarningVisible: Bool = false  // Show warning for 5 seconds
 
     private var lastPickupTime: Date?  // Track the last time a pickup was registered
@@ -31,6 +33,7 @@ class HomePageModel: ObservableObject {
         print("started driving")
         isDriving = true
         time = 0
+        currPickups = 0  // Reset currPickups for the current session
         startTime = Date()  // Set start time when driving begins
 
         // Start a timer to update elapsed time every second
@@ -53,6 +56,9 @@ class HomePageModel: ObservableObject {
         // Invalidate the timer
         timer?.invalidate()
         timer = nil
+
+        // Update the user stats in Firebase
+        updateUserStats()
     }
 
     // Function to start receiving accelerometer updates
@@ -100,8 +106,9 @@ class HomePageModel: ObservableObject {
     // Helper function to register a pickup and update the timestamp
     private func registerPickup(_ currentTime: Date) {
         pickups += 1
+        currPickups += 1  // Increment the pickups for the current session
         lastPickupTime = currentTime
-        print("Pickups: \(pickups)")
+        print("Total Pickups: \(pickups), Current Session Pickups: \(currPickups)")
         showWarning()  // Show warning when a pickup is detected
     }
 
@@ -111,6 +118,55 @@ class HomePageModel: ObservableObject {
         warningTimer?.invalidate()  // Invalidate any previous timer
         warningTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
             self?.isWarningVisible = false
+        }
+    }
+
+    // Function to update user's tokens and hoursDriven in Firebase
+    private func updateUserStats() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("No user is currently logged in.")
+            return
+        }
+
+        let ref = Database.database().reference()
+
+        ref.child("users").child(uid).observeSingleEvent(of: .value) { snapshot in
+            var existingTokens = 0
+            var existingHoursDriven = 0.0
+
+            if let userData = snapshot.value as? [String: Any] {
+                // Fetch existing tokens
+                if let tokens = userData["tokens"] as? Int {
+                    existingTokens = tokens
+                }
+
+                // Fetch existing hours driven
+                if let hoursDriven = userData["hoursDriven"] as? Double {
+                    existingHoursDriven = hoursDriven
+                }
+            }
+
+            // Calculate new tokens and hours driven
+            let newTokens = existingTokens + self.coins
+            let hoursThisSession = self.time / 3600.0  // Convert time from seconds to hours
+            let newHoursDriven = existingHoursDriven + hoursThisSession
+
+            // Prepare updated user data
+            let updatedUserData: [String: Any] = [
+                "tokens": newTokens,
+                "hoursDriven": newHoursDriven
+            ]
+
+            // Update the user's data in Firebase Realtime Database
+            ref.child("users").child(uid).updateChildValues(updatedUserData) { error, _ in
+                if let error = error {
+                    print("Error updating user data: \(error.localizedDescription)")
+                } else {
+                    print("User data updated successfully!")
+                }
+            }
+        } withCancel: { error in
+            print("Error fetching user data: \(error.localizedDescription)")
         }
     }
 }
