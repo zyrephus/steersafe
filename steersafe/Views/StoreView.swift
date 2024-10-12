@@ -28,25 +28,32 @@ struct StoreView: View {
             
             ZStack {
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 20) {
-                        ForEach(viewModel.coupons) { coupon in
-                            StoreItemView(
-                                company: coupon.company,
-                                couponValue: coupon.couponValue,
-                                coinCost: coupon.coinCost,
-                                image: coupon.image,
-                                code: coupon.code,
-                                userTokens: viewModel.tokens
-                            )
+                    VStack(spacing: 20) {
+                        // Insert the QuestView at the top of the scrollable content
+                        QuestView()
+                            .padding(.horizontal)
+
+                        // LazyVGrid for coupons
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 20) {
+                            ForEach(viewModel.coupons) { coupon in
+                                StoreItemView(
+                                    company: coupon.company,
+                                    couponValue: coupon.couponValue,
+                                    coinCost: coupon.coinCost,
+                                    image: coupon.image,
+                                    code: coupon.code,
+                                    userTokens: viewModel.tokens
+                                )
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
                 
                 // Top shadow
                 VStack {
                     Rectangle().fill(LinearGradient(
-                        gradient: Gradient(colors: [Color.black.opacity(0.2),Color.clear]),
+                        gradient: Gradient(colors: [Color.black.opacity(0.2), Color.clear]),
                             startPoint: .top,
                             endPoint: .bottom
                         ))
@@ -66,3 +73,4 @@ struct StoreView_Previews: PreviewProvider {
         StoreView()
     }
 }
+
