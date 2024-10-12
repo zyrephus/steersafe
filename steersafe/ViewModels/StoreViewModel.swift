@@ -25,10 +25,12 @@ class StoreViewModel: ObservableObject {
     @Published var tokens: Int = 0
     @Published var coupons: [Coupon] = []
     
+    private var ref: DatabaseReference!
+    
     init() {
-        fetchUserData()
-        loadCoupons()
-    }
+           fetchUserData()
+            loadCoupons()
+       }
     
     // Function to fetch tokens and hoursDriven from Realtime Database
     func fetchUserData() {
@@ -37,21 +39,23 @@ class StoreViewModel: ObservableObject {
             return
         }
         
-        let ref = Database.database().reference()
-        ref.child("users").child(uid).observeSingleEvent(of: .value) { snapshot in
-            if let userData = snapshot.value as? [String: Any] {
-                // Fetch tokens
-                if let tokens = userData["tokens"] as? Int {
-                    self.tokens = tokens
-                } else {
-                    print("Tokens value is not available.")
+        ref = Database.database().reference().child("users").child(uid)
+
+                // Use observe to continuously monitor changes to the user data
+                ref.observe(.value) { snapshot in
+                    if let userData = snapshot.value as? [String: Any] {
+                        // Fetch tokens
+                        if let tokens = userData["tokens"] as? Int {
+                            self.tokens = tokens
+                        } else {
+                            print("Tokens value is not available.")
+                        }
+                    } else {
+                        print("User data is not available.")
+                    }
+                } withCancel: { error in
+                    print("Error fetching user data: (error.localizedDescription)")
                 }
-            } else {
-                print("User data is not available.")
-            }
-        } withCancel: { error in
-            print("Error fetching user data: \(error.localizedDescription)")
-        }
     }
     
     // Function to load coupons from JSON
