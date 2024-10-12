@@ -14,11 +14,11 @@ struct HomePageView: View {
         VStack(spacing: 20) {
             // Logo at the top
             HStack {
-                Image("logo")  // Replace with the actual image name
+                Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 50) // Adjust the size as needed
-                Spacer()  // Pushes the image to the left
+                    .frame(height: 50)
+                Spacer()
             }
             .padding(.horizontal)
             
@@ -45,10 +45,10 @@ struct HomePageView: View {
             // Centered Text
             Text("Click on the wheel to start driving")
                 .font(.headline)
-                .multilineTextAlignment(.center)  // Ensure the text is centered
+                .multilineTextAlignment(.center)
                 .padding(.top, 10)
 
-            Spacer()  // Push content upwards from the bottom
+            Spacer()
 
             // Bottom tab bar
             HStack {
@@ -58,10 +58,10 @@ struct HomePageView: View {
                 }) {
                     Image("green_wheel")
                         .resizable()
-                        .frame(width: 60, height: 60)  // Larger size for the icons
+                        .frame(width: 60, height: 60) 
                 }
 
-                Spacer(minLength: 40)  // Increase space between icons
+                Spacer(minLength: 40)
 
                 // Market icon
                 Button(action: {
@@ -70,10 +70,10 @@ struct HomePageView: View {
                 }) {
                     Image("market")
                         .resizable()
-                        .frame(width: 60, height: 60)  // Larger size for the icons
+                        .frame(width: 60, height: 60)
                 }
 
-                Spacer(minLength: 40)  // Increase space between icons
+                Spacer(minLength: 40)
 
                 // Leaderboard icon
                 Button(action: {
@@ -82,10 +82,10 @@ struct HomePageView: View {
                 }) {
                     Image("leaderboard")
                         .resizable()
-                        .frame(width: 60, height: 60)  // Larger size for the icons
+                        .frame(width: 60, height: 60)
                 }
 
-                Spacer(minLength: 40)  // Increase space between icons
+                Spacer(minLength: 40)
 
                 // Profile icon
                 Button(action: {
@@ -94,7 +94,7 @@ struct HomePageView: View {
                 }) {
                     Image("profile")
                         .resizable()
-                        .frame(width: 60, height: 60)  // Larger size for the icons
+                        .frame(width: 60, height: 60)
                 }
             }
             .padding(.horizontal, 20)
