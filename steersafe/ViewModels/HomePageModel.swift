@@ -10,9 +10,12 @@ class HomePageModel: ObservableObject {
     @Published var coins: Int = 0           // Total coins earned
     @Published var zAccel: Double = 0.0  // Track z-axis movement
     @Published var pickups: Int = 0
+    @Published var isWarningVisible: Bool = false  // Show warning for 5 seconds
+
     private var lastPickupTime: Date?  // Track the last time a pickup was registered
     private var startTime: Date?            // Track when driving started
     private var timer: Timer?               // Timer for elapsed time tracking
+    private var warningTimer: Timer?        // Timer to hide the warning after 5 seconds
 
     // Toggle driving state
     func toggleDriving() {
@@ -57,7 +60,7 @@ class HomePageModel: ObservableObject {
         print("started measuring accel")
         if motionManager.isAccelerometerAvailable {
             print("accel available")
-            motionManager.accelerometerUpdateInterval = 0.1  // Update interval
+            motionManager.accelerometerUpdateInterval = 0.05  // Update interval
 
             // Start updates for accelerometer data
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { [weak self] data, error in
@@ -99,5 +102,15 @@ class HomePageModel: ObservableObject {
         pickups += 1
         lastPickupTime = currentTime
         print("Pickups: \(pickups)")
+        showWarning()  // Show warning when a pickup is detected
+    }
+
+    // Function to show the "get off your phone" warning for 5 seconds
+    private func showWarning() {
+        isWarningVisible = true
+        warningTimer?.invalidate()  // Invalidate any previous timer
+        warningTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+            self?.isWarningVisible = false
+        }
     }
 }
