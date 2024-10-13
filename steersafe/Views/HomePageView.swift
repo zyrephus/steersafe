@@ -85,16 +85,31 @@ struct HomePageView: View {
                     .cornerRadius(100)
                 }
 
-                // Dynamic Text under the wheel
-                Text(viewModel.isWarningVisible ? "get off your phone!" :
-                 (viewModel.isStationaryVisible ? "please start moving" :
-                 (viewModel.isDriving ? "stay focused" : "tap the wheel to start")))
-                .font(.system(size: 20))
-                .multilineTextAlignment(.center)
-                .padding(.top, 10)
-                .foregroundColor(viewModel.isWarningVisible || viewModel.isStationaryVisible ? .red :
-                                (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))
-                
+                VStack {
+                    // Dynamic Text under the wheel
+                    Text(viewModel.isWarningVisible ? "Get off your phone!" :
+                         (viewModel.isStationaryVisible ? "Please start moving" :
+                         (viewModel.isDriving ? "Stay focused" : "Tap the wheel to start")))
+                        .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 10)
+                        .foregroundColor(viewModel.isWarningVisible || viewModel.isStationaryVisible ? .red :
+                                        (viewModel.isDriving ? Color(UIColor(red: 0.23, green: 0.86, blue: 0.57, alpha: 1.00)) : .gray))
+
+                    if viewModel.isDriving {
+                        Text("Speed Limit: \(viewModel.speedLimit != nil ? String(format: "%.0f mph", viewModel.speedLimit!) : "N/A")")
+                            .font(.system(size: 20))
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 10)
+                            .foregroundColor(Color.gray)
+
+                        Text("Your Speed: \(viewModel.speedDevice != nil ? String(format: "%.0f mph", viewModel.speedDevice!) : "N/A")")
+                            .font(.system(size: 20))
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 5)
+                            .foregroundColor(Color.gray)
+                    }
+                }
                 Spacer()
             }
             .padding(.top)  // Changed from .padding() to .padding(.top)
@@ -139,37 +154,37 @@ struct HomePageView: View {
                 .foregroundColor(.gray)
             
             if viewModel.speedLimitExceeds > 0 {
-                Text("🏎️ Times above speed limit: \(viewModel.speedLimitExceeds) mph")
+                Text("🛑 Times above speed limit: \(viewModel.speedLimitExceeds)")
                     .font(.system(size: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.gray)
             } else {
-                Text("🏎️ Times above speed limit: 0")
+                Text("🛑  Times above speed limit: 0")
                     .font(.system(size: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.gray)
-            }
-            if let speedL = viewModel.speedLimit {
-                Text("🏎️ Speed limit: \(speedL) mph")
-                    .font(.system(size: 16))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.gray)
-            } else {
-                Text("🏎️ Speed limit: 0")
-                    .font(.system(size: 16))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.gray)
-            }
-            if let speedD = viewModel.speedDevice {
-                Text("🏎️ Speed of Device: \(speedD) mph")
-                    .font(.system(size: 16))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.gray)
-            } else {
-                Text("🏎️ Speed of Device: 0")
-                    .font(.system(size: 16))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.gray)
+//            }
+//            if let speedL = viewModel.speedLimit {
+//                Text("🏎️ Speed limit: \(speedL) mph")
+//                    .font(.system(size: 16))
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .foregroundColor(.gray)
+//            } else {
+//                Text("🏎️ Speed limit: 0")
+//                    .font(.system(size: 16))
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .foregroundColor(.gray)
+//            }
+//            if let speedD = viewModel.speedDevice {
+//                Text("📲 Speed of Device: \(speedD) mph")
+//                    .font(.system(size: 16))
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .foregroundColor(.gray)
+//            } else {
+//                Text("📲 Speed of Device: 0")
+//                    .font(.system(size: 16))
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .foregroundColor(.gray)
             }
             
             Text("📱 you used your phone: \(viewModel.currPickups) time(s)")

@@ -33,13 +33,13 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var startTime: Date?            // Track when driving started
     private var timer: Timer?               // Timer for elapsed time tracking
     private var warningTimer: Timer?        // Timer to hide the warning after 5 seconds
+    
 
     override init() {
         super.init()
         locationManager.delegate = self // Set delegate for location manager
         locationManager.requestWhenInUseAuthorization() // Request location permissions
 //        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
     // Toggle driving state
@@ -303,47 +303,35 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        
-        let speedDevice = location.speed // Speed in meters per second
-        print("Speed Device: \(speedDevice) m/s")
-        
+        print("Location Updated: \(location.coordinate.latitude), \(location.coordinate.longitude)") // Debug Print
         lastLocation = location  // Update the last location
-        currentLatitude = location.coordinate.latitude
-        currentLongitude = location.coordinate.longitude
-        print("Current Location: \(currentLatitude), \(currentLongitude)")
         
         if initialLocation == nil {
             initialLocation = lastLocation
-            initialLatitude = currentLatitude
-            initialLongitude = currentLongitude
+            initialLatitude = lastLocation?.coordinate.latitude
+            initialLongitude = lastLocation?.coordinate.latitude
             print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
+            lastLocation = CLLocation(latitude: initialLatitude, longitude: initialLongitude)
         }
+        self.speedDevice = lastLocation?.speed ?? 0.0
+        
+        currentLatitude = lastLocation?.coordinate.latitude
+        currentLongitude = lastLocation?.coordinate.latitude
+        print("Device Speed: \(self.speedDevice) m/s")
         
         fetchSpeedLimit()
-            // Use the code snippet for comparing speedDevice and speedLimit here
-            if let speedDevice = self.speedDevice {
-                // Compare speed directly in m/s
-                if let speedLimit = speedLimit {
-                    self.isOverSpeedLimit = speedDevice > speedLimit
-                    if self.isOverSpeedLimit {
-                        self.speedLimitExceeds += 1
-                        print("Speed Limit Exceeded! Current Speed: \(speedDevice) m/s, Speed Limit: \(speedLimit) m/s")
-                    } else {
-                        print("Speed is within the limit. Current Speed: \(speedDevice) m/s, Speed Limit: \(speedLimit) m/s")
-                    }
-                } else {
-                    print("Speed limit is not available.")
-                    self.isOverSpeedLimit = false
-                }
-            } else {
-                print("Device speed is not available.")
-                self.isOverSpeedLimit = false
+        // comparing speedDevice and speedLimit here
+           
+        self.isOverSpeedLimit = (self.speedDevice ?? 0.0) > (self.speedLimit ?? 0.0)
+        if self.isOverSpeedLimit {
+            self.speedLimitExceeds += 1
+        } else {
+            print("Current Speed: \(self.speedDevice) m/s, Speed Limit: \(self.speedLimit) m/s")
+        }
             }
         }
-    
-    
 
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             print("Failed to find user's location: \(error.localizedDescription)")
         }
-}
+
