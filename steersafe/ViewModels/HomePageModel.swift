@@ -304,19 +304,32 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location  // Update the last location
+        currentLatitude = location.coordinate.latitude
+        currentLongitude = location.coordinate.longitude
+        print("Current Location: \(currentLatitude), \(currentLongitude)")
         
         if initialLocation == nil {
             initialLocation = lastLocation
-            initialLatitude = lastLocation?.coordinate.latitude
-            initialLongitude = lastLocation?.coordinate.longitude
+            initialLatitude = currentLatitude
+            initialLongitude = currentLongitude
             print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
-            lastLocation = CLLocation(latitude: initialLatitude, longitude: initialLongitude)
         }
+            
+        self.speedDevice = lastLocation?.speed ?? 0.0
+            
+        fetchSpeedLimit()
+        
+        // Comparing speedDevice and speedLimit here
+        self.isOverSpeedLimit = (self.speedDevice ?? 0.0) > (self.speedLimit ?? 0.0)
+        if self.isOverSpeedLimit {
+            self.speedLimitExceeds += 1
+        }
+    
+
         self.speedDevice = lastLocation?.speed ?? 0.0
         
-        currentLatitude = lastLocation?.coordinate.latitude
-        currentLongitude = lastLocation?.coordinate.longitude
-        print("Device Speed: \(self.speedDevice) m/s")
+        currentLatitude = lastLocation?.coordinate.latitude ?? 0.0
+        currentLongitude = lastLocation?.coordinate.longitude ?? 0.0
         
         fetchSpeedLimit()
         // comparing speedDevice and speedLimit here
@@ -325,7 +338,6 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         if self.isOverSpeedLimit {
             self.speedLimitExceeds += 1
         } else {
-            print("Current Speed: \(self.speedDevice) m/s, Speed Limit: \(self.speedLimit) m/s")
         }
             }
         }
