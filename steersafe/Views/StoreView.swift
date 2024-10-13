@@ -40,8 +40,19 @@ struct StoreView: View {
                         VStack(spacing: 0) {
                         
                             // Insert the QuestView at the top of the scrollable content
-                            QuestView()
-                                .padding(.horizontal)
+                            Button(action: {
+                                // Trigger popup on QuestView click
+                                redeemedCompany = "Dunkin' Donuts"
+                                redeemedCouponValue = "$10"
+                                redeemedCode = "HarvardChamps2024"
+                                withAnimation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0)) {
+                                    showPopup = true
+                                    popupScale = 1.0
+                                }
+                            }) {
+                                QuestView()
+                                    .padding(.horizontal)
+                            }
 
                             // LazyVGrid for coupons
                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 0) {
