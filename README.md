@@ -30,3 +30,12 @@ What sets steersafe apart is its **gentle, rewarding, and gamified approach**—
 - [ ] Integrate new reward partnerships (e.g., Starbucks, Amazon).
 - [ ] Get an Apple Developer License for more access to phone data to improve phone usage monitoring
 
+## 👥 Contributors:
+
+- **[Wilson Chen (me)](https://github.com/zyrephus)**  
+
+- **[Jonathan Oh](https://github.com/joonhoswe)**  
+
+- **[Sopha Nguyen](https://github.com/sophian3105)**  
+
+- **[Raphael Palacio](https://github.com/raphaelpalacio)**  
