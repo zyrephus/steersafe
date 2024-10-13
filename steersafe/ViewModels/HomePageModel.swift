@@ -303,20 +303,19 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        print("Location Updated: \(location.coordinate.latitude), \(location.coordinate.longitude)") // Debug Print
         lastLocation = location  // Update the last location
         
         if initialLocation == nil {
             initialLocation = lastLocation
             initialLatitude = lastLocation?.coordinate.latitude
-            initialLongitude = lastLocation?.coordinate.latitude
+            initialLongitude = lastLocation?.coordinate.longitude
             print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
             lastLocation = CLLocation(latitude: initialLatitude, longitude: initialLongitude)
         }
         self.speedDevice = lastLocation?.speed ?? 0.0
         
         currentLatitude = lastLocation?.coordinate.latitude
-        currentLongitude = lastLocation?.coordinate.latitude
+        currentLongitude = lastLocation?.coordinate.longitude
         print("Device Speed: \(self.speedDevice) m/s")
         
         fetchSpeedLimit()
