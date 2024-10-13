@@ -5,6 +5,7 @@ struct HomePageView: View {
     @State private var showPopup = false  // State to show/hide popup
     @State private var tokensEarned: Int = 0
     @State private var driveDuration: TimeInterval = 0
+    @State private var speed: Int = 0
     @State private var popupScale: CGFloat = 0.1  // Scale effect for the popup
     @State private var isPulsating = false  // New state variable to control pulsating
     @State private var isCircleAnimating = false  // Control the circle animation
@@ -136,7 +137,19 @@ struct HomePageView: View {
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
-    
+            
+            if let speed = viewModel.speedLimit {
+                Text("🏎️ speed: \(speed) mph")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            } else {
+                Text("🏎️ speed: 0")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            }
+            
             Text("📱 you used your phone: \(viewModel.currPickups) time(s)")
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)

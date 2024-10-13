@@ -71,11 +71,11 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     print("No data received")
                     return
                 }
-                if let jsonString = String(data: data, encoding: .utf8) {
-                            print("Raw Data: \(jsonString)")
-                } else {
-                    print("Failed to convert data to string")
-                }
+//                if let jsonString = String(data: data, encoding: .utf8) {
+//                            print("Raw Data: \(jsonString)")
+//                } else {
+//                    print("Failed to convert data to string")
+//                }
 
                 // Parse the JSON response
                 do {
@@ -278,10 +278,8 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             let distanceMoved = initialLocation?.distance(from: currentLocation) ?? 0
-            print("Distance moved: \(distanceMoved)")
             let stationaryThreshold: CLLocationDistance = 5 // Movement less than 5 meters is considered stationary
-            print("Distance moved:\(stationaryThreshold)")
-
+            
             //User did not move
             if distanceMoved < stationaryThreshold {
                 isStationaryVisible = true
