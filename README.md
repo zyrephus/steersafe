@@ -1,4 +1,4 @@
-# 🚘 SteerSafe - Drive Safely, Get Rewarded.
+# 🚘 steersafe - Drive Safely, Get Rewarded.
 ![Swift](https://img.shields.io/badge/swift-F54A2A?style=for-the-badge&logo=swift&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Firestore](https://img.shields.io/badge/Firestore-%23FFCA28.svg?style=for-the-badge&logo=firebase&logoColor=white)
