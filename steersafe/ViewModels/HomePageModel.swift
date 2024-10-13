@@ -55,8 +55,7 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("TomTom API Key: \(Keys.tomtomApiKey)")
             let urlString = "https://api.tomtom.com/snap-to-roads/1/snap-to-roads?points=\(initialLongitude),\(initialLatitude);\(currentLongitude),\(currentLatitude)&fields={projectedPoints{type,geometry{type,coordinates},properties{routeIndex}},route{type,geometry{type,coordinates},properties{id,speedRestrictions{maximumSpeed{value,unit}}}}}&key=\(apiKey)"
 
-
-    //        print("Url \(urlString)")
+//            print("Url \(urlString)")
             guard let url = URL(string: urlString) else {
                 print("Invalid URL")
                 return
@@ -279,7 +278,9 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             let distanceMoved = initialLocation?.distance(from: currentLocation) ?? 0
+            print("Distance moved: \(distanceMoved)")
             let stationaryThreshold: CLLocationDistance = 5 // Movement less than 5 meters is considered stationary
+            print("Distance moved:\(stationaryThreshold)")
 
             //User did not move
             if distanceMoved < stationaryThreshold {
