@@ -138,13 +138,35 @@ struct HomePageView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
             
-            if let speed = viewModel.speedLimit {
-                Text("🏎️ speed: \(speed) mph")
+            if viewModel.speedLimitExceeds > 0 {
+                Text("🏎️ Times above speed limit: \(viewModel.speedLimitExceeds) mph")
                     .font(.system(size: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.gray)
             } else {
-                Text("🏎️ speed: 0")
+                Text("🏎️ Times above speed limit: 0")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            }
+            if let speedL = viewModel.speedLimit {
+                Text("🏎️ Speed limit: \(speedL) mph")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            } else {
+                Text("🏎️ Speed limit: 0")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            }
+            if let speedD = viewModel.speedDevice {
+                Text("🏎️ Speed of Device: \(speedD) mph")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+            } else {
+                Text("🏎️ Speed of Device: 0")
                     .font(.system(size: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.gray)

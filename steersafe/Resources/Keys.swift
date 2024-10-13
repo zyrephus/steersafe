@@ -1,5 +1,5 @@
 import Foundation
 
 struct Keys {
-    static let tomtomApiKey = "UjkZoFnXttG8jj4hHdDAvPnAZhF6eCGC"
+    static let tomtomApiKey = "XwJ3e4dMR2s9y2izHNJlHB5LAgEfqGGQ"
 }

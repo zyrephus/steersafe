@@ -25,6 +25,8 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentLongitude: Double = 0.0
     @Published var speedLimit: Double? // Speed limit on the road
     @Published var speedLimitExceeds: Int = 0 // Count of speed limit exceeds
+    @Published var speedDevice: Double? // Speed of moving device
+    @Published var isOverSpeedLimit: Bool = false // Check if user goes over speed limit
     @Published var isStationaryVisible: Bool = false
     
     private var lastPickupTime: Date?  // Track the last time a pickup was registered
@@ -36,6 +38,9 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self // Set delegate for location manager
         locationManager.requestWhenInUseAuthorization() // Request location permissions
+//        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
     // Toggle driving state
     func toggleDriving() {
@@ -47,13 +52,14 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     func fetchSpeedLimit() {
             guard currentLatitude != 0.0 && currentLongitude != 0.0 else {
-                print("Current location is not set.")
-                return
-            }
+            print("Current location is not set.")
+            return
+        }
 
             let apiKey = Keys.tomtomApiKey
             print("TomTom API Key: \(Keys.tomtomApiKey)")
             let urlString = "https://api.tomtom.com/snap-to-roads/1/snap-to-roads?points=\(initialLongitude),\(initialLatitude);\(currentLongitude),\(currentLatitude)&fields={projectedPoints{type,geometry{type,coordinates},properties{routeIndex}},route{type,geometry{type,coordinates},properties{id,speedRestrictions{maximumSpeed{value,unit}}}}}&key=\(apiKey)"
+
 
 //            print("Url \(urlString)")
             guard let url = URL(string: urlString) else {
@@ -297,6 +303,10 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
+        
+        let speedDevice = location.speed // Speed in meters per second
+        print("Speed Device: \(speedDevice) m/s")
+        
         lastLocation = location  // Update the last location
         currentLatitude = location.coordinate.latitude
         currentLongitude = location.coordinate.longitude
@@ -309,8 +319,29 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("Initial Location set to: \(initialLatitude), \(initialLongitude)")
         }
         
-        fetchSpeedLimit()  // Fetch the speed limit whenever the location updates
-    }
+        fetchSpeedLimit()
+            // Use the code snippet for comparing speedDevice and speedLimit here
+            if let speedDevice = self.speedDevice {
+                // Compare speed directly in m/s
+                if let speedLimit = speedLimit {
+                    self.isOverSpeedLimit = speedDevice > speedLimit
+                    if self.isOverSpeedLimit {
+                        self.speedLimitExceeds += 1
+                        print("Speed Limit Exceeded! Current Speed: \(speedDevice) m/s, Speed Limit: \(speedLimit) m/s")
+                    } else {
+                        print("Speed is within the limit. Current Speed: \(speedDevice) m/s, Speed Limit: \(speedLimit) m/s")
+                    }
+                } else {
+                    print("Speed limit is not available.")
+                    self.isOverSpeedLimit = false
+                }
+            } else {
+                print("Device speed is not available.")
+                self.isOverSpeedLimit = false
+            }
+        }
+    
+    
 
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             print("Failed to find user's location: \(error.localizedDescription)")
