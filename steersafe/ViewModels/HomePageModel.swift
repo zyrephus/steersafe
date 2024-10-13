@@ -279,7 +279,7 @@ class HomePageModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             let distanceMoved = initialLocation?.distance(from: currentLocation) ?? 0
-            let stationaryThreshold: CLLocationDistance = 0.1 // Movement less than 5 meters is considered stationary
+            let stationaryThreshold: CLLocationDistance = 5 // Movement less than 5 meters is considered stationary
 
             //User did not move
             if distanceMoved < stationaryThreshold {
